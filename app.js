@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var monk = require('monk');
-var db = monk('localhost:27017/MongoWorkshop');
+var db = monk('localhost:27017/travelexperts');
 
 console.log("passed init");
 
@@ -26,7 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 console.log("passed init");
 
 app.use(function(req, res, next){
-	req.db = db;
+  req.db = db;
+  db.get("agents");
 	next();
 });
 app.use('/', indexRouter);
