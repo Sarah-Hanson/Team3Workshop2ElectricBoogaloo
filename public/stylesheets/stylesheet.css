@@ -1,7 +1,7 @@
 /* 	I used this tag to make a splash background across the entire back page,
 	note that the img is hardcoded so copy and make your own as needed */
 .jumbo-bg{
-	background-image: url('/media/sunrise3.jpg');
+	background-image: url('sunrise3.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
