@@ -2,14 +2,80 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
 	<% partial("commonHeaderContent") %> 
-	<% partial("navBar") %> 
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p><%= title %>, world</p>
+  	<% partial("navBar") %> 
 	
+	<div class="jumbotron sticky-top jumbo-bg fill pt-50">
+	<!-- 4 panel feature packages -->
+	<div class="jumbotron text-center md-10 p-2 pt-0 light see-through">
+		<h1 class="display-3 font-weight-bold mt-0 pt-0"> Feature Destinations </h2>
+		<div class="row no-gutters salad">
+			<!-- individual pic with hover-effect -->
+			<div class="col-md-3">
+				<div class="hovereffect">
+					<a href="/featuretrip.html#wct">
+						<img class="img-responsive rounded img-fluid" src="/media/pkgs/cliffs-crop.jpg" alt="">
+						<div class="overlay">
+							<h2> Explore the coast with a backpacking trip along the west coast trail </h2>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- individual pic with hover-effect -->
+			<div class="col-md-3">
+				<div class="hovereffect">
+					<a href="/featuretrip.html#fishintrip">
+						<img class="img-responsive rounded img-fluid"
+						src="/media/pkgs/sunrise-crop.jpg" alt="">
+							<div class="overlay">
+								<h2> See beautiful sunsets while staying at lakeside lodgings on a fishing trip</h2>
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- individual pic with hover-effect -->		
+			<div class="col-md-3">
+				<div class="hovereffect">
+					<a href="/featuretrip.html#coastal">
+						<img class="img-responsive rounded img-fluid"
+						src="/media/pkgs/harbor-crop.jpg" alt="">
+						<div class="overlay">
+							<h2>Visit the ocean and eat delicious fresh caught fish on Victoria Island</h2>
+							
+						</div>
+					</a>
+				</div>
+			</div>
+			<!-- individual pic with hover-effect -->
+			<div class="col-md-3">
+				<div class="hovereffect">
+					<a href="/featuretrip.html#backcountry">
+						<img class="img-responsive rounded img-fluid"
+						src="/media/pkgs/mountain-crop.jpg" alt="">
+						<div class="overlay">
+							<h2>Stay in a backcountry lodge in the Canadian rockies with plenty of hiking options</h2>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- additional packages -->
+	<div class="jumbotron text-center md-10 mt-0 p-auto pt-0 light see-through">
+		<h2 class="display-4 salad"> Additonal Packages </h2>
+		<hr class="col-xs-12">
+		<div class="row salad">
+			<a class="col-md-4 text-dark" href=""> Package1 </a>
+			<a class="col-md-4 text-dark" href=""> Package2 </a>
+			<a class="col-md-4 text-dark" href=""> Package3 </a>
+			<a class="col-md-4 text-dark" href=""> Package4 </a>
+			<a class="col-md-4 text-dark" href=""> Package5 </a>
+			<a class="col-md-4 text-dark" href=""> Package6 </a>
+		</div>
+	</div>
+
 	<% partial("bootstrapScripts") %> 
   </body>
 </html>

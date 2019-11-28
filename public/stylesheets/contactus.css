@@ -1,0 +1,26 @@
+
+      h3{
+        font-family: 'Ibarra Real Nova', serif;
+        font-size:40px;
+      }
+
+      #insight{
+        font-family: 'Baskervville', serif;
+        font-size: 30px;
+      }
+       
+       .policy{
+        float:right;
+       }
+       .nav{
+        background-color:blue;
+        border:1px; 
+       }
+
+       p a{
+        float:right;
+       }
+    
+     #terms {
+      float:bottom;
+     }

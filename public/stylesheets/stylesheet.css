@@ -1,0 +1,47 @@
+/* 	I used this tag to make a splash background across the entire back page,
+	note that the img is hardcoded so copy and make your own as needed */
+.jumbo-bg{
+	background-image: url('/media/sunrise3.jpg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height:100%;
+}
+
+/* Fill the entire parent container */
+.fill{
+    min-height: 100vh;
+    height: 100%;
+}
+
+/* make the container (and everything inside it) a little see through */
+.see-through {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+/* make the container (and everything inside it) solid (negates see-through) */
+.salad {
+	opacity: 1;
+}
+
+/* adds some padding to the top of the object so it sticks out past the header bar */
+.padder-top{
+	padding-top: 50px;
+}
+
+/* 	same as top padder but it appies to the bottom of the object and works
+	for a footer bar */
+.padder-bottom{
+	padding-bottom: 50px;
+}
+
+/* 	removes all the padding around the object so it snugs right up to the
+	things around it */
+.no-pad{
+	padding-bottom: 2px;
+	padding-top: 2px;
+}
+.small-pad{
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
