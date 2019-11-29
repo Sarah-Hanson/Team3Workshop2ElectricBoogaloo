@@ -64,66 +64,48 @@ app.post("/post_form", (req, res) => {
   formData[10] = req.body.password;
   //res.end("Data received: fname=" + fname + ", lname=" + lname);
   //res.redirect("/thanks");
-  mongo.connect(url, { useUnifiedTopology: true}, (err, db) => {
-    if (err) { throw err;
-    } else {
+  var clientID = "";
+  mongo.connect(url, { useUnifiedTopology: true }, (err, db) => {
+    if (err) throw err;
+   
       console.log("connected");
       var dbo = db.db("travelexperts");
-      var mydoc = {
-        CustFirstName: formData[0],
-        CustLastName: formData[1],
-        CustAddress: formData[2],
-        CustAddress2: formData[3],
-        CustCity: formData[4],
-        CustProv: formData[5],
-        CustPostal: formData[6],
-        CustHomePhone: formData[7],
-        CustBusPhone: formData[8],
-        CustEmail: formData[9],
-        CustPassword: formData[10]
-      };
-     var clientID = dbo.collection("customers").find().sort({CustomerId: -1}).limit(1);//(result,(err, result)=>{
-        if (err) throw err;
-        //for (agent of result)
-        //{
-          console.log("Agent:" + clientID );
-       // }
-        db.close();
-      
-  
-      // dbo.collection("customers").insertOne(mydoc, (err, result) => {
-      //   if (err) throw err;
-      //   console.log("Customer inserted");
-      //   console.log(result.result);
-      //   db.close();
-      // });
-    }
-  });
-  /*
-    var collection = db.get('customers');
-    collection.insert({
-        "CustFirstName": formData[0],
-        "CustLastName": formData[1],
-        "CustAddress": formData[2],
-        "CustAddress2": formData[3],
-        "CustCity": formData[4],
-        "CustProv": formData[5],
-        "CustPostal": formData[6],
-        "CustHomePhone": formData[7],
-        "CustBusPhone": formData[8],
-        "CustEmail": formData[9],
-        "CustPassword": formData[10]
-      },
-      /* Error handling function 
-      function (err, doc) {
-        if (err) {
-          res.send("There was a problem adding the information to the database.");
-        } else {
-          /* If it didn't screw up redirect to a new page 
-          res.redirect("/thanks");
-        }
-      }); */
 
+      dbo.collection("customers").find().sort({ CustomerId: -1 }).toArray((err, result) => {
+        if (err) throw err;
+        console.log(result[0].CustomerId);
+        clientID = result[0].CustomerId +1;
+        console.log("ClientID: " + clientID);
+     
+        var mydoc = {
+          CustFirstName: formData[0],
+          CustLastName: formData[1],
+          CustAddress: formData[2],
+          CustAddress2: formData[3],
+          CustCity: formData[4],
+          CustProv: formData[5],
+          CustPostal: formData[6],
+          CustHomePhone: formData[7],
+          CustBusPhone: formData[8],
+          CustEmail: formData[9],
+          CustPassword: formData[10],
+          CustomerId: clientID,
+          _id: clientID
+        };
+        dbo.collection("customers").insertOne(mydoc, (err, result) => {
+          if (err) throw err;
+          console.log("Customer inserted");
+          console.log(result.result);
+          db.close();
+        });
+
+     
+      });
+      
+
+
+    
+  });
   //res.redirect("/thanks");
 });
 
@@ -146,56 +128,54 @@ app.use(function (err, req, res, next) {
 });
 
 //login submission
-app.post("/login_form", (req, res)=>{
-	console.log(req.body);
-	
-	var loggedIn = false;
-	var loginName = "";
-	
-	var userEmail = req.body.CustEmail;
-	var userName = req.body.CustFirstName;
-	
-	//connecting to database
-	mongo.connect(url, { useUnifiedTopology: true }, (err, client)=>{
-		if (err)
-		{
-			throw err;
-		} 
-		else
-		{
-			console.log(userEmail);
-			console.log("Connected to Database");
-			
-			//find posted email
-			var dbo = client.db("travelexperts");
-			dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result)=>{
-				if (err) 
-				{
-					throw err;
-				}
-				else
-				{
-					//No email
-					if (result == null){
-						alert("This email is not in our records, please register on our site");
-						res.redirect("/registration.ejs"); //check naming
-					}
-					//password checked and correct
-					else if (userName === result.CustFirstName){
-						console.log("Customer Name pass is correct");
-						loginName = result.CustFirstName;
-						loggedIn = true;
-						console.log("Login Name is: " + loginName);
-						console.log("Logged in: " + loggedIn);
-					}
-					//if passwords do not match
-					else{
-						alert("Password does not match");
-					}
-				}	
-			});
-		}
-	});
+app.post("/login_form", (req, res) => {
+  console.log(req.body);
+
+  var loggedIn = false;
+  var loginName = "";
+
+  var userEmail = req.body.CustEmail;
+  var userName = req.body.CustFirstName;
+
+  //connecting to database
+  mongo.connect(url, {
+    useUnifiedTopology: true
+  }, (err, client) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(userEmail);
+      console.log("Connected to Database");
+
+      //find posted email
+      var dbo = client.db("travelexperts");
+      dbo.collection("customers").findOne({
+        CustEmail: userEmail
+      }, (err, result) => {
+        if (err) {
+          throw err;
+        } else {
+          //No email
+          if (result == null) {
+            alert("This email is not in our records, please register on our site");
+            res.redirect("/registration.ejs"); //check naming
+          }
+          //password checked and correct
+          else if (userName === result.CustFirstName) {
+            console.log("Customer Name pass is correct");
+            loginName = result.CustFirstName;
+            loggedIn = true;
+            console.log("Login Name is: " + loginName);
+            console.log("Logged in: " + loggedIn);
+          }
+          //if passwords do not match
+          else {
+            alert("Password does not match");
+          }
+        }
+      });
+    }
+  });
 });
 
 module.exports = app;
