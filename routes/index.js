@@ -24,10 +24,6 @@ router.get('/contactus', function(req, res, next) {
   res.render('contactus.ejs', { title: 'Contact Us' });
 });
 
-router.get('/vacaypackages', function(req, res, next) {
-  res.render('vacaypackages.ejs', { title: 'Vacation Packages' });
-});
-
 router.get('/', function(req, res, next) {
   res.render('index.ejs', { title: 'Travel Experts' });
 });
