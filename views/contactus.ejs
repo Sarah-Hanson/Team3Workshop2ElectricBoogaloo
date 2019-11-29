@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet">
+
+  <style>
+    h3 {
+      font-family: 'Ibarra Real Nova', serif;
+      font-size: 40px;
+    }
+
+    .policy {
+      float: right;
+    }
+
+    .nav {
+      background-color: blue;
+      border: 1px;
+    }
+  </style>
+
+  <title>Contact Us page</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/index">Travel Experts</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <form class="form-inline mt-2 mt-md-0" action="/bouncer.php" method="post">
+            <input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="Email" name="navemail">
+            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password"
+              name="navpassword">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+          </form>
+        </li><br />
+        <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
+        <li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>
+        <li class="nav-item"> <a class="nav-link" href="/vacayPackages">Vacation Packages</a>
+        <li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid"
+    style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;">
+    <div class="container text-center">
+      <h1>Contact Us</h1>
+    </div>
+  </div>
+
+  <div class="container-fluid bg-light text-dark">
+    <div class="row">
+      <div class="col-sm-3 col-md-6">
+
+        <h3>We are here to meet your travel needs</h3>
+        <p>Our dedication to customer service is the cornerstone of our company. If you have any question or requests,
+          please contact us</p><br />
+
+
+        <p><u>Main Office address</u></p>
+        <P>6820 Falconridge Blvd</P>
+        <p>Calgary, AB T3P 0V2</p>
+        <p><strong>Tel:</strong> (403) 287 6899, (403) 287 5342</p>
+        <p><strong>Toll Free:</strong> 1 (800) 256 4164</p>
+
+        <button type="button" class="btn btn-outline-secondary">Email Us</button>
+
+      </div>
+
+      <div class="col-sm-9 col-md-6">
+        <p>What Insight do you need today?</p> <br />
+
+        <form action="">
+          <div class="form-group">
+            <label for="fname"></label>
+            <input type="text" class="form-control" id="fname" placeholder="First Name*" required>
+          </div>
+          <div class="form-group">
+            <label for="lname"></label>
+            <input type="text" class="form-control" id="lname" placeholder="Last Name*" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email"></label>
+            <input type="email" class="form-control" id="email" placeholder="Email*" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone"></label>
+            <input type="text" class="form-control" id="phone" placeholder="Phone Number">
+          </div>
+
+          <div class="form-group">
+            <label for="addr"></label>
+            <input type="text" class="form-control" id="addr" placeholder="Please Enter your address">
+          </div>
+
+          <div class="form-group">
+            <label for="city"></label>
+            <input type="text" class="form-control" id="city" placeholder="City">
+          </div>
+
+          <div class="form-group">
+            <label for="prov"></label>
+            <select class="form-control" name="prov" id="prov">
+              <option value="">Select Province</option>
+              <option value="AB">Alberta</option>
+              <option value="BC">British Columbia</option>
+              <option value="MN">Manitoba</option>
+              <option value="NB">New Brunswick</option>
+              <option value="NL">Newfoundland and Labrador</option>
+              <option value="NS">Nova Scotia</option>
+              <option value="ON">Ontario</option>
+              <option value="QU">Quebec</option>
+              <option value="SK">Saskatchewan</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="pcode"></label>
+            <input type="text" class="form-control" id="pcode" placeholder="Postal Code">
+          </div>
+
+
+          <div class="form-group">
+            <label for="comment"></label>
+            <textarea class="form-control" rows="5" id="comment" placeholder="Comment"></textarea>
+          </div>
+
+
+
+
+
+
+
+          <div class="form-group form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox"> Remember me
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+
+        </form><br />
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <footer>
+    <div class="jumbotron">
+      <div class="row">
+        <nav class="nav">
+          <a class="nav-link active" href="#">Active</a>
+          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </nav>
+
+      </div>
+
+
+      <p>COPYRIGHT &copy; 2019 TRAVEL EXPERTS </p>
+      <div class="policy">
+        <a href="">TERMS OF SALE</a>&nbsp;|
+        <a href="">TERMS OF USE</a>&nbsp;&nbsp;|
+        <a href="">RETURN POLICY</a>&nbsp;|
+        <a href="">PRIVACY POLICY</a>&nbsp;|
+      </div>
+
+
+
+
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>
