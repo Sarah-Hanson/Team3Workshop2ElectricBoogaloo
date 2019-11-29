@@ -18,7 +18,7 @@
     <div class="container-fluid jumbotron sticky-top jumbo-bg fill ">
         <!-- Main div-->
         <!-- Add Navigation bar -->
-        
+
         <nav class="navbar navbar-dark fixed-top bg-dark">
             <a class="navbar-brand" href="/index">Travel Experts</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -39,14 +39,14 @@
                     <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
                     <li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>
                     <li class="nav-item"> <a class="nav-link" href="/vacayPackages">Vacation Packages</a>
-                    <li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>	
+                    <li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>
                     </li>
                 </ul>
             </div>
-        </nav>                <!-- Main Section -->
+        </nav> <!-- Main Section -->
         <div class="section jumbotron see-through small-pad col-md-6">
             <!-- Section div -->
-            <form id="regForm" method="post" action="bouncer.php" target="_blank" class="display-7 font-weight-bold">
+            <form id="regForm" method="post" action="/post_form" target="_blank" class="display-7 font-weight-bold">
                 <div class="form-row">
                     <div class="form-group col-6">
                         <label for="firstname">First Name</label>
@@ -107,6 +107,21 @@
 
                     </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-6">
+                        <label for="homephone">Home Phone</label>
+                        <input type="text" class="form-control" id="homephone" placeholder="(403)555-5555"
+                            name="homephone"
+                            onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="busphone">Business Phone</label>
+                        <input type="text" class="form-control" id="busphone" placeholder="(403)555-5555"
+                            name="busphone"
+                            onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-6">
                         <label for="inputEmail4">Email</label>

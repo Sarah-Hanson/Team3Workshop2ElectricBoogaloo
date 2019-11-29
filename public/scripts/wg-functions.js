@@ -39,6 +39,10 @@ function fnFormValidate() {
     } else {
         if (fnValidatePostal(document.getElementById("inputpostal").value)) {
             return confirm("Continue submitting?");
+            /*if(confirm("Continue submitting?")){
+                fnSubmit();
+            } */
+
         } else {
             document.getElementById("inputpostal").style.backgroundColor = "#f0cccc";
             document.getElementById("inputpostal").focus();
@@ -54,4 +58,9 @@ function fnClearForm() {
         myform.elements[i].style.backgroundColor = "";
         myform.elements[i].value = "";
     }
+}
+
+function fnSubmit(){
+
+    alert("Data Submitted");
 }

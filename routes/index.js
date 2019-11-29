@@ -11,6 +11,11 @@ router.get('/registration', function(req, res, next) {
   res.render('registration.ejs', { title: 'Client Registration' });
 });
 
+
+router.get('/thanks', function(req, res, next) {
+  res.render('thanks.ejs', { title: 'Thanks for your data' });
+});
+
 router.get('/index', function(req, res, next) {
   res.render('index.ejs', { title: 'Travel Experts' });
 });
