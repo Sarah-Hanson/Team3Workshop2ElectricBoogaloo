@@ -127,28 +127,9 @@ app.post("/post_form", (req, res) => {
   //res.redirect("/thanks");
 });
 
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  console.log(err);
-  res.render('error');
-});
-
 //login submission
 app.post("/login_form", (req, res)=>{
-	console.log(req.body);
-	
+
 	var loggedIn = false;
 	var loginName = "";
 	
@@ -177,8 +158,8 @@ app.post("/login_form", (req, res)=>{
 				{
 					//No email
 					if (result == null){
-						alert("This email is not in our records, please register on our site");
-						res.redirect("/registration.ejs"); //check naming
+						//alert("This email is not in our records, please register on our site", "Register");
+						res.redirect("/registration"); //check naming
 					}
 					//password checked and correct
 					else if (userName === result.CustFirstName){
@@ -190,12 +171,29 @@ app.post("/login_form", (req, res)=>{
 					}
 					//if passwords do not match
 					else{
-						alert("Password does not match");
+						//alert("Password does not match");
 					}
 				}	
 			});
 		}
 	});
+});
+
+// catch 404 and forward to error handler
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  console.log(err);
+  res.render('error');
 });
 
 module.exports = app;
