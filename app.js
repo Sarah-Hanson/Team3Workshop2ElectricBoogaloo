@@ -105,5 +105,57 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+//login submission
+app.post("/login_form", (req, res)=>{
+	console.log(req.body);
+	
+	var loggedIn = false;
+	var loginName = "";
+	
+	var userEmail = req.body.CustEmail;
+	var userName = req.body.CustFirstName;
+	
+	//connecting to database
+	mongo.connect(url, { useUnifiedTopology: true }, (err, client)=>{
+		if (err)
+		{
+			throw err;
+		} 
+		else
+		{
+			console.log(userEmail);
+			console.log("Connected to Database");
+			
+			//find posted email
+			var dbo = client.db("travelexperts");
+			dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result)=>{
+				if (err) 
+				{
+					throw err;
+				}
+				else
+				{
+					//No email
+					if (result == null){
+						alert("This email is not in our records, please register on our site");
+						res.redirect("/registration.ejs"); //check naming
+					}
+					//password checked and correct
+					else if (userName === result.CustFirstName){
+						console.log("Customer Name pass is correct");
+						loginName = result.CustFirstName;
+						loggedIn = true;
+						console.log("Login Name is: " + loginName);
+						console.log("Logged in: " + loggedIn);
+					}
+					//if passwords do not match
+					else{
+						alert("Password does not match");
+					}
+				}	
+			});
+		}
+	});
+});
 
 module.exports = app;
