@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-	<% include /views/partials/commonHeaderContent %> 
+    <meta name="author" content="Sarah Hanson">
+	<% include ./partials/commonHeaderContent.ejs %> 
   </head>
   <body>
-  	<% include /views/partials/navBar %> 
+  	<% include ./partials/navBar.ejs %> 
 	
 	<div class="jumbotron sticky-top jumbo-bg fill pt-50">
 	<!-- 4 panel feature packages -->
@@ -76,6 +76,6 @@
 		</div>
 	</div>
 
-	<% include /views/partials/bootStrapScripts %> 
+	<% include ./partials/bootStrapScripts.ejs %> 
   </body>
 </html>
