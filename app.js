@@ -6,6 +6,9 @@ var logger = require('morgan');
 var monk = require('monk');
 var db = monk('localhost:27017/travelexperts');
 var formData = [];
+const mongo = require("mongodb").MongoClient;
+const url = "mongodb://localhost:27017/travelexperts";
+
 
 console.log("passed init");
 
@@ -61,29 +64,65 @@ app.post("/post_form", (req, res) => {
   formData[10] = req.body.password;
   //res.end("Data received: fname=" + fname + ", lname=" + lname);
   //res.redirect("/thanks");
-  var collection = db.get('customers');
-  collection.insert({
-      "CustFirstName": formData[0],
-      "CustLastName": formData[1],
-      "CustAddress": formData[2],
-      "CustAddress2": formData[3],
-      "CustCity": formData[4],
-      "CustProv": formData[5],
-      "CustPostal": formData[6],
-      "CustHomePhone": formData[7],
-      "CustBusPhone": formData[8],
-      "CustEmail": formData[9],
-      "CustPassword": formData[10]
-    },
-    /* Error handling function */
-    function (err, doc) {
-      if (err) {
-        res.send("There was a problem adding the information to the database.");
-      } else {
-        /* If it didn't screw up redirect to a new page */
-        res.redirect("/thanks");
-      }
-    });
+  mongo.connect(url, { useUnifiedTopology: true}, (err, db) => {
+    if (err) { throw err;
+    } else {
+      console.log("connected");
+      var dbo = db.db("travelexperts");
+      var mydoc = {
+        CustFirstName: formData[0],
+        CustLastName: formData[1],
+        CustAddress: formData[2],
+        CustAddress2: formData[3],
+        CustCity: formData[4],
+        CustProv: formData[5],
+        CustPostal: formData[6],
+        CustHomePhone: formData[7],
+        CustBusPhone: formData[8],
+        CustEmail: formData[9],
+        CustPassword: formData[10]
+      };
+     var clientID = dbo.collection("customers").find().sort({CustomerId: -1}).limit(1);//(result,(err, result)=>{
+        if (err) throw err;
+        //for (agent of result)
+        //{
+          console.log("Agent:" + clientID );
+       // }
+        db.close();
+      
+  
+      // dbo.collection("customers").insertOne(mydoc, (err, result) => {
+      //   if (err) throw err;
+      //   console.log("Customer inserted");
+      //   console.log(result.result);
+      //   db.close();
+      // });
+    }
+  });
+  /*
+    var collection = db.get('customers');
+    collection.insert({
+        "CustFirstName": formData[0],
+        "CustLastName": formData[1],
+        "CustAddress": formData[2],
+        "CustAddress2": formData[3],
+        "CustCity": formData[4],
+        "CustProv": formData[5],
+        "CustPostal": formData[6],
+        "CustHomePhone": formData[7],
+        "CustBusPhone": formData[8],
+        "CustEmail": formData[9],
+        "CustPassword": formData[10]
+      },
+      /* Error handling function 
+      function (err, doc) {
+        if (err) {
+          res.send("There was a problem adding the information to the database.");
+        } else {
+          /* If it didn't screw up redirect to a new page 
+          res.redirect("/thanks");
+        }
+      }); */
 
   //res.redirect("/thanks");
 });
