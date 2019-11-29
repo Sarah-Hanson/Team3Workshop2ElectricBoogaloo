@@ -2,10 +2,10 @@
 <html>
   <head>
     <title><%= title %></title>
-	<% partial("commonHeaderContent") %> 
+	<% include /views/partials/commonHeaderContent %> 
   </head>
   <body>
-  	<% partial("navBar") %> 
+  	<% include /views/partials/navBar %> 
 	
 	<div class="jumbotron sticky-top jumbo-bg fill pt-50">
 	<!-- 4 panel feature packages -->
@@ -76,6 +76,6 @@
 		</div>
 	</div>
 
-	<% partial("bootstrapScripts") %> 
+	<% include /views/partials/bootStrapScripts %> 
   </body>
 </html>
