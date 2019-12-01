@@ -26,10 +26,16 @@
 				</div>
 				-->
 			<% 
+				pkgList.sort(function(a,b) {return b.PkgAgencyCommission-a.PkgAgencyCommission});
+				
 				var featureImgs = '';
-				var i = 0; //I declared outside loop so it can be used below
+				var i = 0;
+				for (i;i<pkgList.length;i++) {
+					console.log("item: " + pkgList[i].PkgName + "|" + pkgList[i].imgsrc);
+				}
+				
+				i=0;
 				for( i; i<4; i++) {
-					console.log("Working on: " + pkgList[i].PkgName + "|" + pkgList[i].imgsrc);
 					featureImgs += "<div class=\"col-xl-3 col-md-6 col-xs-10\"> <div class=\"hovereffect\"> <a href=\"#\"> <img class=\"img-responsive rounded img-fluid\" src="
 					+ pkgList[i].imgsrc
 					+ " alt=\"\"> <div class=\"overlay\"> <h2>" + pkgList[i].PkgDesc 
