@@ -52,6 +52,8 @@ console.log("passed Router");
 app.post("/post_form", (req, res) => {
   //console.log("In post form");
   //console.log(req.body.firstname);
+
+
   formData[0] = req.body.firstname;
   formData[1] = req.body.lastname;
   formData[2] = req.body.address;
@@ -68,98 +70,101 @@ app.post("/post_form", (req, res) => {
   var clientID = "";
   mongo.connect(url, { useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
-   
-      console.log("connected");
-      var dbo = db.db("travelexperts");
+    console.log("connected");
+    var dbo = db.db("travelexperts");
 
-      dbo.collection("customers").find().sort({ CustomerId: -1 }).toArray((err, result) => {
-        if (err) throw err;
-        console.log(result[0].CustomerId);
-        clientID = result[0].CustomerId +1;
-        console.log("ClientID: " + clientID);
-     
-        var mydoc = {
-          CustFirstName: formData[0],
-          CustLastName: formData[1],
-          CustAddress: formData[2],
-          CustAddress2: formData[3],
-          CustCity: formData[4],
-          CustProv: formData[5],
-          CustPostal: formData[6],
-          CustHomePhone: formData[7],
-          CustBusPhone: formData[8],
-          CustEmail: formData[9],
-          CustPassword: formData[10],
-          CustomerId: clientID,
-          _id: clientID
-        };
-        dbo.collection("customers").insertOne(mydoc, (err, result) => {
+    console.log("CustFirstName: " + formData[0] + ", CustLastName: " + formData[1]);
+//    dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] }).sort({ CustomerId: -1 }).toArray((err, result) => {
+
+    var foundName = dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] });
+    //console.log("foundName: " + foundName.CustomerId);
+      if (foundName.CustomerId != undefined) {
+        console.log("User Exists");
+        db.close();
+        //res.redirect("/UserExists");
+      } else {
+
+        dbo.collection("customers").find().sort({ CustomerId: -1 }).toArray((err, result) => {
           if (err) throw err;
+          console.log(result[0].CustomerId);
+          clientID = result[0].CustomerId + 1;
+          console.log("ClientID: " + clientID);
+
+          var mydoc = {
+            CustFirstName: formData[0],
+            CustLastName: formData[1],
+            CustAddress: formData[2],
+            CustAddress2: formData[3],
+            CustCity: formData[4],
+            CustProv: formData[5],
+            CustPostal: formData[6],
+            CustHomePhone: formData[7],
+            CustBusPhone: formData[8],
+            CustEmail: formData[9],
+            CustPassword: formData[10],
+            CustomerId: clientID,
+            _id: clientID
+          };
+          // dbo.collection("customers").insertOne(mydoc, (err, result) => {
+          //   if (err) throw err;
           console.log("Customer inserted");
-          console.log(result.result);
+          // console.log(result.result);
           db.close();
+          // });
+
+
         });
+      };
 
-     
-      });
-      
-
-
-    
+    //res.redirect("/thanks");
   });
-  //res.redirect("/thanks");
 });
-
 //login submission
-app.post("/login_form", (req, res)=>{
+app.post("/login_form", (req, res) => {
 
-	var loggedIn = false;
-	var loginName = "";
-	
-	var userEmail = req.body.CustEmail;
-	var userName = req.body.CustFirstName;
-	
-	//connecting to database
-	mongo.connect(url, { useUnifiedTopology: true }, (err, client)=>{
-		if (err)
-		{
-			throw err;
-		} 
-		else
-		{
-			console.log(userEmail);
-			console.log("Connected to Database");
-			
-			//find posted email
-			var dbo = client.db("travelexperts");
-			dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result)=>{
-				if (err) 
-				{
-					throw err;
-				}
-				else
-				{
-					//No email
-					if (result == null){
-						//alert("This email is not in our records, please register on our site", "Register");
-						res.redirect("/registration"); //check naming
-					}
-					//password checked and correct
-					else if (userName === result.CustFirstName){
-						console.log("Customer Name pass is correct");
-						loginName = result.CustFirstName;
-						loggedIn = true;
-						console.log("Login Name is: " + loginName);
-						console.log("Logged in: " + loggedIn);
-					}
-					//if passwords do not match
-					else{
-						//alert("Password does not match");
-					}
-				}	
-			});
-		}
-	});
+  var loggedIn = false;
+  var loginName = "";
+
+  var userEmail = req.body.CustEmail;
+  var userName = req.body.CustFirstName;
+
+  //connecting to database
+  mongo.connect(url, { useUnifiedTopology: true }, (err, client) => {
+    if (err) {
+      throw err;
+    }
+    else {
+      console.log(userEmail);
+      console.log("Connected to Database");
+
+      //find posted email
+      var dbo = client.db("travelexperts");
+      dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result) => {
+        if (err) {
+          throw err;
+        }
+        else {
+          //No email
+          if (result == null) {
+            //alert("This email is not in our records, please register on our site", "Register");
+            res.redirect("/registration"); //check naming
+          }
+          //password checked and correct
+          else if (userName === result.CustFirstName) {
+            console.log("Customer Name pass is correct");
+            loginName = result.CustFirstName;
+            loggedIn = true;
+            console.log("Login Name is: " + loginName);
+            console.log("Logged in: " + loggedIn);
+          }
+          //if passwords do not match
+          else {
+            //alert("Password does not match");
+          }
+        }
+      });
+    }
+  });
 });
 
 // catch 404 and forward to error handler
