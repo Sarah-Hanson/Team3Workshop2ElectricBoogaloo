@@ -1,16 +1,23 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET vacay page. */
-router.get('/vacation', function(req, res, next) {
-  res.render('vacayPackages.ejs', { title: 'Vacation Packages' });
+router.get('/vacation', function(req, res) {
+    var db = req.db;
+
+    var collection = db.get('packages');
+    collection.find({},{},function(e,docs){
+		// Send that array of stuff to the EJS page 'userlist' to make a web page with em all
+        res.render('vacayPackages.ejs', 
+		{ 
+			title : "Vacation Packages",
+            pkgList : docs
+        });
+    });
 });
 
-//Wade's registration page
 router.get('/registration', function(req, res, next) {
   res.render('registration.ejs', { title: 'Client Registration' });
 });
-
 
 router.get('/thanks', function(req, res, next) {
   res.render('thanks.ejs', { title: 'Thanks for your data' });
@@ -28,6 +35,6 @@ router.get('/', function(req, res, next) {
   res.render('index.ejs', { title: 'Travel Experts' });
 });
 
+
+
 module.exports = router;
-
-

@@ -27,11 +27,14 @@ app.use(express.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// Sarah is tentatively taking this out cause I don't think its needed with the other 3 includes
+// app.use(express.static(path.join(__dirname, 'public')));
 // added 3 statics by WG, solved issues with images, styles and functions not loading
+
 app.use(express.static(path.join(__dirname, 'public/stylesheets')));
 app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'public/scripts')));
+app.use(express.static(path.join(__dirname, 'public/pkgFiles')));
 
 console.log("passed init");
 
@@ -45,9 +48,7 @@ app.use('/', indexRouter);
 
 console.log("passed Router");
 
-
-
-
+//Registration submission
 app.post("/post_form", (req, res) => {
   //console.log("In post form");
   //console.log(req.body.firstname);
