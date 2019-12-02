@@ -118,7 +118,6 @@ app.post("/post_booking", function(req, res) {
 	var collection = db.get('bookings');
 	
 	collection.insert({
-			"_id":,
 			"BookingId":11,
 			"BookingDate":new Date(),
 			"BookingNo":"DFS3",
