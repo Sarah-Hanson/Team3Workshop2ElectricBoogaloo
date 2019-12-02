@@ -110,6 +110,32 @@ app.post("/post_form", (req, res) => {
     });
   });
 });
+app.post("/post_booking", function(req, res) {
+	var db = req.db;
+	var pkgNum = req.body.packageNum;
+	var travellers = req.body.travellers;
+	
+	var collection = db.get('bookings');
+	
+	collection.insert({
+			"BookingId":11,
+			"BookingDate":new Date(),
+			"BookingNo":"DFS3",
+			"TravelerCount":travellers,
+			"CustomerId":143,
+			"TripTypeId":"B",
+			"PackageId":pkgNum
+		},
+			function(err, doc) {
+				if (err) {
+					res.send("problem adding to db");
+				}
+				else {
+					res.redirect("/vacation");
+				}
+			
+			});
+});
 
 
 //login submission
