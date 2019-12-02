@@ -15,6 +15,19 @@ router.get('/vacation', function(req, res) {
     });
 });
 
+router.get('/pickapackage/', function(req, res, next) {
+	var db = req.db;
+    var collection = db.get('packages');
+    collection.find({},{},function(e,docs){
+		res.render('pickapackage.ejs',
+		{
+			title: 'Choose your Destination!',
+			pkgList : docs,
+			pkgID : req.query.pkgID
+		});
+	});
+});
+
 router.get('/registration', function(req, res, next) {
   res.render('registration.ejs', { title: 'Client Registration' });
 });
