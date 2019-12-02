@@ -8,12 +8,12 @@
   	<% include ./partials/navBar.ejs %> 	
 	<!-- Handle Login Checking here -->
 	<div class="jumbotron sticky-top jumbo-bg fill pt-50">	
-		<div class="jumbotron text-center md-10 p-2 pt-0 light see-through">
+		<div class="jumbotron text-center md-10 p-2 pt-0 light see-through col-md-6">
 		
 			<form id="bookForm" method="post" action="/post_booking" targets="_blank" class ="display-7 font-weight-bold salad">
 				<div class="form-row">
 					<label for="package"> Package </label>
-					<select type="text" class="form-control" id="packageNum" placeholder="Select Package" name="package" onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};" onchange="changePkg">
+					<select type="text" class="form-control" id="packageNum" placeholder="Select Package" name="package" onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};" onchange="changePkg()">
 						<% 
 							var packageSelect ="";
 							for (i=0;i<pkgList.length;i++) {

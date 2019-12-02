@@ -15,7 +15,7 @@ router.get('/vacation', function(req, res) {
     });
 });
 
-router.get('/pickapackage/', function(req, res, next) {
+router.get('/pickapackage', function(req, res, next) {
 	var db = req.db;
     var collection = db.get('packages');
     collection.find({},{},function(e,docs){
