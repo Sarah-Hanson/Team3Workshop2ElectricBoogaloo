@@ -4,8 +4,9 @@
 <head>
     <meta name="author" content="Wade Grimm">
     <!-- Include CSS from remote location and file -->
-
     <script src="wg-functions.js"></script>
+        <!-- Include JavaScripts for Navbar animation and functionality -->
+	<% include ./partials/bootStrapScripts.ejs %> 
     <% include ./partials/commonHeaderContent.ejs %> 
 </head>
 
@@ -13,7 +14,6 @@
     <div class="container-fluid jumbotron sticky-top jumbo-bg fill ">
         <!-- Main div-->
         <!-- Add Navigation bar -->
-
         <% include ./partials/navBar.ejs %> 
         
         <div class="section jumbotron see-through small-pad col-md-6">
@@ -112,8 +112,6 @@
         </div> <!-- Section div -->
     </div><!-- Main div-->
 
-    <!-- Include JavaScripts for Navbar animation and functionality -->
-	<% include ./partials/bootStrapScripts.ejs %> 
 
 </body>
 
