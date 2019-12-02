@@ -48,7 +48,8 @@ app.use('/', indexRouter);
 
 console.log("passed Router");
 
-//Registration submission
+//Registration submission, added by Wade Grimm 
+// Lots of Console.logs to follow as a ton of troubleshooting was required.
 app.post("/post_form", (req, res) => {
   formData[0] = req.body.firstname;
   formData[1] = req.body.lastname;
@@ -68,7 +69,7 @@ app.post("/post_form", (req, res) => {
     var dbo = db.db("travelexperts");
 
     //console.log("CustFirstName: " + formData[0] + ", CustLastName: " + formData[1]);
-    var foundName = dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] }, (err, result) => {
+    dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] }, (err, result) => {
       //console.log("foundName: " + foundName.CustomerId);
       if (result!= null) {
         //console.log("User Exists");
@@ -109,6 +110,8 @@ app.post("/post_form", (req, res) => {
     });
   });
 });
+
+
 //login submission
 app.post("/login_form", (req, res) => {
 
