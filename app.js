@@ -177,10 +177,11 @@ app.post("/login_form", (req, res) => {
             loggedIn = true;
             console.log("Login Name is: " + loginName);
             console.log("Logged in: " + loggedIn);
+			res.send("Welcome back " + loginName);
           }
           //if passwords do not match
           else {
-            //alert("Password does not match");
+            res.send("Incorrect Password");
           }
         }
       });
