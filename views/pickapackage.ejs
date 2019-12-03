@@ -23,9 +23,9 @@
 		function changePackage (el) {
 			console.log(pkgList);
 			var curPkg = getMatch(el);
-			if (!curPkg==null) {
-				document.getElementById("pkgStart").innerHTML 	= curPkg.PkgStartDate;
-				document.getElementById("pkgEnd").innerHTML 	= curPkg.PkgEndDate;
+			if (!(curPkg===null)) {
+				document.getElementById("pkgStart").value 	= curPkg.PkgStartDate;
+				document.getElementById("pkgEnd").value 	= curPkg.PkgEndDate;
 			}
 			console.log("el=" + el);
 		}
