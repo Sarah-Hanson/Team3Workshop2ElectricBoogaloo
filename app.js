@@ -10,7 +10,7 @@ const mongo = require("mongodb").MongoClient;
 const url = "mongodb://localhost:27017/travelexperts";
 
 
-console.log("passed init");
+console.log("./>------------------<\\\n<<>> Server Running <<>>\n.\\>------------------</");
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public/images')));
 app.use(express.static(path.join(__dirname, 'public/scripts')));
 app.use(express.static(path.join(__dirname, 'public/pkgFiles')));
 
-console.log("passed init");
+console.log("public folders loaded");
 
 app.use(function (req, res, next) {
   req.db = db;
@@ -46,11 +46,12 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 
-console.log("passed Router");
+console.log("router loaded");
 
 //Registration submission, added by Wade Grimm 
 // Lots of Console.logs to follow as a ton of troubleshooting was required.
 app.post("/post_form", (req, res) => {
+
   formData[0] = req.body.firstname;
   formData[1] = req.body.lastname;
   formData[2] = req.body.address;
@@ -110,6 +111,7 @@ app.post("/post_form", (req, res) => {
     });
   });
 });
+
 app.post("/post_booking", function(req, res) {
 	var db = req.db;
 	var pkgNum = req.body.packageNum;

@@ -7,8 +7,28 @@
 	- Possibly checks logged in status
 
 /* populates the page using the object created by getDetails */
-function changePackage (packageConfig) {
 
+var pkgList;
+
+function setData(el) {
+	pkgList = el;
+}
+
+function getMatch(el) {
+	for (var i=0;pkgList.length;i++) {
+		if (pkgList[i].PkgName == el) return pkgList[i];
+	}
+	return null;
+}
+
+function changePackage (el) {
+	var curPkg = getMatch(el);
+	if (!curPkg==null) {
+		document.getElementById("pkgStart").innerHTML 	= curPkg.PkgStartDate;
+		document.getElementById("pkgEnd").innerHTML 	= curPkg.PkgEndDate;
+	}
+	console.log(el);
+}
 
 
 

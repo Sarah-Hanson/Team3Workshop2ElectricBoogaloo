@@ -2,7 +2,49 @@
 <html lang="en">
   <head>
     <meta name="author" content="Sarah Hanson">
-	<% include ./partials/commonHeaderContent.ejs %> 
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<!-- disables caching -->
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="expires" content="-1">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="../stylesheet.css">
+	<link rel="stylesheet" href="../hoverEffect.css">
+
+	<title><%= title %></title>
+	<% include ./partials/bootStrapScripts.ejs %> 
+	<script>
+		var pkgList;
+
+		function changePackage (el) {
+			console.log(pkgList);
+			var curPkg = getMatch(el);
+			if (!curPkg==null) {
+				document.getElementById("pkgStart").innerHTML 	= curPkg.PkgStartDate;
+				document.getElementById("pkgEnd").innerHTML 	= curPkg.PkgEndDate;
+			}
+			console.log("el=" + el);
+		}
+		
+		function getMatch(el) {
+			for (var i=0;i<pkgList.length;i++) {
+				if (pkgList[i].PackageId == el) return pkgList[i];
+			}
+			return null;
+		}		
+		
+		$(function () {
+			pkgList = <%-pkgArr%>;
+			//pkgList = JSON.parse("<%-pkgArr%>");
+			console.log("Package list: " + pkgList);
+			changePackage(document.getElementById("packageNum").value);
+		});
+
+	</script>
   </head>
   <body>
   	<% include ./partials/navBar.ejs %> 	
@@ -13,14 +55,12 @@
 			<form id="bookForm" method="post" action="/post_booking" targets="_blank" class ="display-7 font-weight-bold salad">
 				<div class="form-row">
 					<label for="package"> Package </label>
-					<select type="text" class="form-control" id="packageNum" placeholder="Select Package" name="package" onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};" onchange="changePkg()">
+					<select type="text" class="form-control" id="packageNum" placeholder="Select Package" name="package" onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};" onchange="changePackage(this.value)">
 						<% 
 							var packageSelect ="";
 							for (i=0;i<pkgList.length;i++) {
-								console.log(pkgList[i].PkgName);
-								packageSelect+="<option value=\""
-								+ pkgList[i].PackageId
-								+ "\">"
+								//console.log(pkgList[i].PkgName);
+								packageSelect+="<option value=\"" + pkgList[i].PackageId + "\">"
 								+ pkgList[i].PkgName
 								+ "</option>";
 							}
@@ -49,7 +89,5 @@
 			</form>	
 		</div>
 	</div>
-	
-	<% include ./partials/bootStrapScripts.ejs %> 
   </body>
 </html>

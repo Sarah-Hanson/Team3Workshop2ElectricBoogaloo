@@ -23,6 +23,7 @@ router.get('/pickapackage', function(req, res, next) {
 		{
 			title: 'Choose your Destination!',
 			pkgList : docs,
+			pkgArr : JSON.stringify(docs),
 			pkgID : req.query.pkgID
 		});
 	});
