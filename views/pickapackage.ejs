@@ -23,11 +23,34 @@
 		function changePackage (el) {
 			var curPkg = getMatch(el);
 			if (curPkg!=null) {
-				document.getElementById("pkgStart").value 	= curPkg.PkgStartDate;
-				document.getElementById("pkgEnd").value 	= curPkg.PkgEndDate;
+
+				var pkgStartFormatted = new Date(curPkg.PkgStartDate).toISOString().replace(/-/g, '').split('T')[0];
+				var pkgEndFormatted = new Date(curPkg.PkgEndDate).toISOString().replace(/-/g, '').split('T')[0];
+
+				document.getElementById("pkgStart").value 	= pkgStartFormatted;
+				document.getElementById("pkgEnd").value 	= pkgEndFormatted;
 				
-				now = new Date;
-				console.log(""+curPkg.PkgStartDate < now);
+				var now = new Date();
+				// setting package date as a YYY-MM-DD format, might be easier ways to do this??
+				var now1 = new Date(curPkg.PkgStartDate);
+				var testVar = "";
+				var testVar1 = "";
+				//Remove the time values from the Date
+				var formatted_date = (new Date()).toISOString().replace(/-/g, '').split('T')[0];
+				console.log(formatted_date);
+				//Remove time values from Date
+				var formatted_date1 = (now1.toISOString().replace(/-/g, '').split('T')[0]);
+				console.log(formatted_date1);
+
+				
+				testvar = curPkg.PkgStartDate <= now;
+				testvar1 = formatted_date1 <= formatted_date;
+				console.log(curPkg.PkgStartDate);
+				console.log(now.getFullYear() + "-" + (now.getMonth() +1) + "-" + now.getDate());
+				//Previous test kept failing as they weren't the same data
+				console.log("Currpkg test "+ testvar);
+				//This test returns true as the comparison is better
+				console.log("Currpkg test1 "+ testvar1);
 				
 				if (curPkg.PkgStartDate <= now) {
 					document.getElementById("pkgStart").style.color = "red";
