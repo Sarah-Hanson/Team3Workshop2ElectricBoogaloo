@@ -20,7 +20,7 @@ var loggedIn = false;
 router.post("/login_form", (req, res) => {
 
   var userEmail = req.body.CustEmail;
-  var userName = req.body.CustFirstName;
+  var userPass = req.body.CustPassword;
 
   //connecting to database
   mongo.connect(url, {
@@ -43,10 +43,10 @@ router.post("/login_form", (req, res) => {
           //No email
           if (result == null) {
             //alert("This email is not in our records, please register on our site", "Register");
-            res.redirect("/registration"); //check naming
+            res.redirect("/noemail"); //check naming
           }
           //password checked and correct
-          else if (userName === result.CustFirstName) {
+          else if (userPass === result.CustPassword) {
             console.log("Customer Name pass is correct");
             loginName = result.CustFirstName;
             loggedIn = true;
@@ -58,7 +58,7 @@ router.post("/login_form", (req, res) => {
           }
           //if passwords do not match
           else {
-            loginName = "Incorrect Password";
+            res.redirect("/incorrectpass");
 			//res.send("Incorrect Password");
           }
         }
@@ -139,6 +139,14 @@ router.get('/regerror', function (req, res, next) {
 
 router.get('/pickError', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Not logged in', popText: 'Please log in before booking a package', dest: 'registration'	});
+});
+
+router.get('/incorrectpass', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index'	});
+});
+
+router.get('/noemail', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration"	});
 });
 
 // Hamish
