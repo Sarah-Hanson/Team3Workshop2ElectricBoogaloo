@@ -55,13 +55,13 @@ router.get('/updateDB', function(req, res, next) {
 	var db = req.db;
 	var collection = db.get('packages');
 
-	var updateArr = ["Shirahama2.jpg","hawaii.jpg","Kyoto2.jpg","TrafalgarSq2.jpg""];
+	var updateArr = ["Shirahama2.jpg","hawaii.jpg","Kyoto2.jpg","TrafalgarSq2.jpg"];
 	var i;
 	for (i=0;i<updateArr.length;i++) {
 		collection.update(
-		{id_:i},
-		{$set : {"imgsrc":[i]}},
-		{upsert:false,multi:true}) 
+		{_id:i+1},
+		{$set : {"imgsrc": "pkgs/" + updateArr[i]}},
+		{upsert:true,multi:true}) 
 	}
 	
 	var newItems = [{
@@ -73,7 +73,7 @@ router.get('/updateDB', function(req, res, next) {
 		"PkgBasePrice": 3000,
 		"PkgAgencyCommission": 450,
 		"imgsrc": "pkgs/Cliffs-crop.jpg"
-		}, {,
+		}, {
 		"PackageId": 6,
 		"PkgName": "Victoria Island vacation",
 		"PkgStartDate": "2020-11-01T00:00:00.000Z",
@@ -82,7 +82,7 @@ router.get('/updateDB', function(req, res, next) {
 		"PkgBasePrice": 3000,
 		"PkgAgencyCommission": 450,
 		"imgsrc": "pkgs/Harbor-crop.jpg"
-		}, {,
+		}, {
 		"PackageId": 7,
 		"PkgName": "Backcountry Lodge Expedition",
 		"PkgStartDate": "2020-11-01T00:00:00.000Z",
@@ -91,7 +91,7 @@ router.get('/updateDB', function(req, res, next) {
 		"PkgBasePrice": 3000,
 		"PkgAgencyCommission": 450,
 		"imgsrc": "pkgs/Mountain-crop.jpg"
-		}, {,
+		}, {
 		"PackageId": 8,
 		"PkgName": "North Saskatechewan Fish 'n Fry",
 		"PkgStartDate": "2020-11-01T00:00:00.000Z",
@@ -100,12 +100,13 @@ router.get('/updateDB', function(req, res, next) {
 		"PkgBasePrice": 3000,
 		"PkgAgencyCommission": 450,
 		"imgsrc": "pkgs/Sunrise-crop.jpg"
-	}]
-	collection.instert(newItems);
+	}];
+	collection.insert(newItems);
 	
 	//For Testing Reasons, take to a page and puke out the collection
 	collection.find({},{},function(e,docs){
-	res.render('updateDB.ejs'), { pkgList : docs });
+  res.render('updateDB.ejs', { pkgList : docs, title: 'DB Fix Travel Experts'});
+  });
 });
 
 
