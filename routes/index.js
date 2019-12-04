@@ -20,7 +20,7 @@ var loggedIn = false;
 router.post("/login_form", (req, res) => {
 
   var userEmail = req.body.CustEmail;
-  var userName = req.body.CustFirstName;
+  var userPass = req.body.CustPassword;
 
   //connecting to database
   mongo.connect(url, {
@@ -46,7 +46,7 @@ router.post("/login_form", (req, res) => {
             res.redirect("/noemail"); //check naming
           }
           //password checked and correct
-          else if (userName === result.CustFirstName) {
+          else if (userPass === result.CustPassword) {
             console.log("Customer Name pass is correct");
             loginName = result.CustFirstName;
             loggedIn = true;
@@ -95,19 +95,23 @@ router.get('/vacation', function(req, res) {
 
 // Sarah Hanson
 router.get('/pickapackage', function (req, res, next) {
-	var db = req.db;
-	var collection = db.get('packages');
-	collection.find({}, {}, function (e, docs) {
-		res.render('pickapackage.ejs', {
-			title: 'Choose your Destination!',
-			pkgList : docs,
-			pkgArr : JSON.stringify(docs),
-			pkgID : req.query.pkgID,
-			name: loginName,
-			loggedstat: loggedIn
+	if (loggedIn) {
+		var db = req.db;
+		var collection = db.get('packages');
+		collection.find({}, {}, function (e, docs) {
+			res.render('pickapackage.ejs', {
+				title: 'Choose your Destination!',
+				pkgList : docs,
+				pkgArr : JSON.stringify(docs),
+				pkgID : req.query.pkgID,
+				name: loginName,
+				loggedstat: loggedIn
+			});
 		});
-	});
-	console.log()
+	}
+	else {
+          res.redirect("/registration");
+	}
 });
 
 // Wade Grimm
