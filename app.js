@@ -76,7 +76,8 @@ app.post("/post_form", (req, res) => {
       if (result!= null) {
         //console.log("User Exists");
         db.close();
-        res.send("/UserExists");
+        //res.send("/UserExists");
+        res.redirect("/regerror");
       } else {
 
         dbo.collection("customers").find().sort({ CustomerId: -1 }).toArray((err, result) => {
@@ -113,6 +114,7 @@ app.post("/post_form", (req, res) => {
   });
 });
 
+//booking post added by Sarah
 app.post("/post_booking", function(req, res) {
 	var db = req.db;
 	var pkgNum = req.body.packageNum;
