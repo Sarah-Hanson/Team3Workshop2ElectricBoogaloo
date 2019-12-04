@@ -302,7 +302,7 @@ router.get('/contactus', function (req, res, next) {
 
 							res.write('<div class="container"><div class="row">')
 							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-alisha-zhao.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
+								'<img class="card-img-top" src="/agentt.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
 								'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 							// res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
 
@@ -378,16 +378,8 @@ router.get('/contactus', function (req, res, next) {
 				});
 			});
 		});
-	//}); //.listen(2019, ()=>{ console.log("Server is started") });
-
-
-
-
-
-
 
 });
-
 
 router.get('/', function(req, res, next) {
 	res.render('index.ejs', { 
