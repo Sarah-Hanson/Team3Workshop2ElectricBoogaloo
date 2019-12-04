@@ -31,31 +31,7 @@
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-dark fixed-top bg-dark">
-		<a class="navbar-brand" href="/index">Travel Experts</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-			aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarCollapse">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<form class="form-inline mt-2 mt-md-0" action="/login_form" method="post">
-						<input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="Email"
-							name="CustEmail">
-						<input class="form-control mr-sm-2" type="password" placeholder="Password"
-							aria-label="Password" name="CustFirstName">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-					</form>
-				</li><br />
-				<li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
-				<li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>
-				<li class="nav-item"> <a class="nav-link" href="/vacayPackages">Vacation Packages</a>
-				<li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>	
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<% include ./partials/navBar.ejs %>
 
 	<div class="jumbotron col-lg-8 col-md-8 col-sm-8 col-xs-8 offset-2 float-md-center see-through" style="height: 90vh; margin-top: 25px">
 		<div class="container col-12">
@@ -73,7 +49,7 @@
 					<div id="carouselSecond" class="see-through text-center col-5">
 						<h1>About Us</h1>
 						<p>Established in 2019, Travel Experts is a group of ambitious travel guides and organizers to provide you with the trip of your dreams</p>
-						<a href="contactusT3.html">More about us</a>
+						<a href="contactus">More about us</a>
 					</div>
 				  </div>
 				  <div class="carousel-item"data-interval="10000">
@@ -81,7 +57,7 @@
 					<div id="carouselHead" class="see-through text-center col-5">
 						<h1>Travel Packages</h1>
 						<p>Enjoy our tremedeously designed travel packages</p>
-						<a href="vacayPackages.html">Click here for more information</a>
+						<a href="vacayPackages">Click here for more information</a>
 					</div>
 				  </div>
 				  <div class="carousel-item" data-interval="10000">
@@ -89,7 +65,7 @@
 					<div id="carouselSecond" class="see-through text-center col-5">
 						<h1>Register Now!</h1>
 						<p>Our trip registration is quicker than ever!</p>
-						<a href="Registration.html">Click here to start your new adventure!</a>
+						<a href="Registration">Click here to start your new adventure!</a>
 					</div>
 			</div>
 		</div>
