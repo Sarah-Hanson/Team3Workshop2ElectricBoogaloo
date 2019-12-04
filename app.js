@@ -127,9 +127,7 @@ app.post("/post_booking", function(req, res) {
 	collection.find({},{},function(e,docs){
 		docs = sort_by_key(docs,"BookingId");
 		bookingArr = docs;
-		console.log(docs[0]);
 		bookingID = docs[0].BookingId+1;
-
 		collection.insert({
 				"BookingId":bookingID,
 				"BookingDate":new Date(),
@@ -143,13 +141,12 @@ app.post("/post_booking", function(req, res) {
 					res.send("problem adding to db");
 				}
 				else {
-					console.log(bookingID);
 					res.redirect("/thanksBook");
 				}
 			});
 		});
 });
-
+// Sarah Hanson
 function sort_by_key(array, key)
 {
  return array.sort(function(a, b)
