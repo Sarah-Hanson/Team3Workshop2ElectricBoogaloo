@@ -112,7 +112,7 @@ router.get('/pickapackage', function (req, res, next) {
 		});
 	}
 	else {
-          res.redirect("/registration");
+          res.redirect("/pickError");
 	}
 });
 
@@ -130,12 +130,17 @@ router.get('/thanksReg', function(req, res, next) {
   res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted', dest: 'index' });
 });
 
+// Sarah Hanson
 router.get('/thanksBook', function(req, res, next) {
   res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking', dest: 'index' });
 });
 
 router.get('/regerror', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration'	});
+});
+
+router.get('/pickError', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Not logged in', popText: 'Please log in before booking a package', dest: 'registration'	});
 });
 
 router.get('/incorrectpass', function (req, res, next) {
@@ -146,7 +151,7 @@ router.get('/noemail', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration"	});
 });
 
-
+// Hamish
 router.get('/index', function(req, res, next) {
   res.render('index.ejs', { 
   title: 'Travel Experts',
