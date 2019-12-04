@@ -91,19 +91,23 @@ router.get('/vacation', function(req, res) {
 });
 
 router.get('/pickapackage', function (req, res, next) {
-	var db = req.db;
-	var collection = db.get('packages');
-	collection.find({}, {}, function (e, docs) {
-		res.render('pickapackage.ejs', {
-			title: 'Choose your Destination!',
-			pkgList : docs,
-			pkgArr : JSON.stringify(docs),
-			pkgID : req.query.pkgID,
-			name: loginName,
-			loggedstat: loggedIn
+	if (loggedIn) {
+		var db = req.db;
+		var collection = db.get('packages');
+		collection.find({}, {}, function (e, docs) {
+			res.render('pickapackage.ejs', {
+				title: 'Choose your Destination!',
+				pkgList : docs,
+				pkgArr : JSON.stringify(docs),
+				pkgID : req.query.pkgID,
+				name: loginName,
+				loggedstat: loggedIn
+			});
 		});
-	});
-	console.log()
+	}
+	else {
+          res.redirect("/registration");
+	}
 });
 
 router.get('/registration', function(req, res, next) {

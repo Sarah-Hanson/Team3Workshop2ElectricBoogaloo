@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta name="author" content="Sarah Hanson">
+	<% include ./partials/bootStrapScripts.ejs %> 
+	<% include ./partials/commonHeaderContent.ejs %> 
+  </head>
+  <body>
+  	<% include ./partials/navBar.ejs %> 
+	
+	<div class="jumbotron sticky-top jumbo-bg fill pt-50">
+	<!-- 4 panel feature packages -->
+		<div class="jumbotron text-center md-10 p-2 pt-0 light see-through">
+			<h1 class="display-3 font-weight-bold mt-0 pt-0"> Contact Us </h2>
+				<!-- EJS Script to create the 4 panel feature package section -->
+			<% 
+				/*
+					Sort Agents here by agency and dump into agency list
+					
+				
+				*/
+				var fullPage = "";
+				for (j=0; j<agencyList; j++){	
+					var contactCards = "";
+					agencyAgents = agentsSorted[j];
+					for(i=0; j<agencyAgents; i++) {
+						contactCards += " <div class=\"card\" style=\"width: 18rem;\"> <img class=\"card-img-top\" src=\"
+							+ agencyAgents[i].imgsrc
+							+ "\" alt=\"Card image cap\"> <div class=\"card-body\"> <h5 class=\"card-title\">"
+							+ agencyAgents[i].AgtFirstName + " " + agencyAgents[i].AgtLastName</h5>
+							+ "<p class=\"card-text\"> \"Tel: \" + agencyAgents[i].AgtBusPhone</p> + \"\n\" + agencyAgents.AgtEmail|</div> </div>"
+					}
+					fullPage += contactCards;
+				}
+			%>
+			<div class="row no-gutters salad">
+				<%- fullPage %>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
