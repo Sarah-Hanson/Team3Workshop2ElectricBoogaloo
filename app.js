@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var monk = require('monk');
+const session = require('express-session');
 var db = monk('localhost:27017/travelexperts');
 var formData = [];
 const mongo = require("mongodb").MongoClient;
@@ -105,7 +106,7 @@ app.post("/post_form", (req, res) => {
           // console.log("Customer inserted");
           // console.log(result.result);
           db.close();
-          res.redirect("/thanks");
+          res.redirect("/thanksReg");
           });
         });
       };
@@ -142,7 +143,7 @@ app.post("/post_booking", function(req, res) {
 				}
 				else {
 					console.log(bookingID);
-					res.redirect("/vacation");
+					res.redirect("/thanksBook");
 				}
 			});
 		});
