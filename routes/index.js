@@ -121,15 +121,15 @@ router.get('/registration', function(req, res, next) {
 
 // Wade Grimm
 router.get('/thanksReg', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted' });
+  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted', dest: 'index' });
 });
 
 router.get('/thanksBook', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking' });
+  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking', dest: 'index' });
 });
 
 router.get('/regerror', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error'	});
+	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration'	});
 });
 
 
