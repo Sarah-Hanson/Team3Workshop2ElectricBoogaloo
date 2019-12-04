@@ -1,3 +1,5 @@
+// Main contributors Sarah, Hamish and Wade
+
 var express = require('express');
 const session = require('express-session');
 var router = express.Router();
@@ -14,7 +16,7 @@ router.use(session(mySession));
 var loginName = "";
 var loggedIn = false;
 
-//login submission
+//login submission - Hamish
 router.post("/login_form", (req, res) => {
 
   var userEmail = req.body.CustEmail;
@@ -65,7 +67,7 @@ router.post("/login_form", (req, res) => {
   });
 });
 
-//Logout button
+//Logout button - Hamish
 router.post("/logout_form", (req, res) => {
 
 	loginName = "";
@@ -74,6 +76,7 @@ router.post("/logout_form", (req, res) => {
 	
 });
 
+// Sarah Hanson
 router.get('/vacation', function(req, res) {
     var db = req.db;
 
@@ -90,6 +93,7 @@ router.get('/vacation', function(req, res) {
     });
 });
 
+// Sarah Hanson
 router.get('/pickapackage', function (req, res, next) {
 	if (loggedIn) {
 		var db = req.db;
@@ -110,6 +114,7 @@ router.get('/pickapackage', function (req, res, next) {
 	}
 });
 
+// Wade Grimm
 router.get('/registration', function(req, res, next) {
   res.render('registration.ejs', { 
   title: 'Client Registration',
@@ -118,19 +123,17 @@ router.get('/registration', function(req, res, next) {
   });
 });
 
-
+// Wade Grimm
 router.get('/thanksReg', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted' });
+  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted', dest: 'index' });
 });
 
 router.get('/thanksBook', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking' });
+  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking', dest: 'index' });
 });
 
 router.get('/regerror', function (req, res, next) {
-	res.render('regerror.ejs', {
-		title: 'Data Exists'
-	});
+	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration'	});
 });
 
 
@@ -142,13 +145,7 @@ router.get('/index', function(req, res, next) {
   });
 });
 
-router.get('/contactus', function(req, res, next) {
-  res.render('contactus.ejs', { 
-  title: 'Contact Us',
-  name: loginName,
-  loggedstat: loggedIn
- });
-});
+
 
 //Updates the base travelExperts DB with a couple extra fields and documents
 router.get('/updateDB', function (req, res, next) {
@@ -219,17 +216,10 @@ router.get('/updateDB', function (req, res, next) {
 });
 
 
-router.get('/', function (req, res, next) {
-	res.render('index.ejs', {
-		title: 'Travel Experts'
-	});
-});
+// Imported by Wade Grimm, Integrating Raymonds changes from a seperate Git repository into the main work Sarah, Hamish
+// and Wade have been using all along
 
 router.get('/contactus', function (req, res, next) {
-	//res.render('contactus.ejs', { title: 'Contact Us' });
-
-	// const express=require("express");
-	// const app= express();
 	const http = require("http");
 	var MongoClient = require('mongodb').MongoClient;
 	var url = "mongodb://localhost:27017/";
@@ -319,7 +309,7 @@ router.get('/contactus', function (req, res, next) {
 
 							res.write('<div class="container"><div class="row">')
 							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-alisha-zhao.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
+								'<img class="card-img-top" src="/agentt.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
 								'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 							// res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
 
@@ -395,23 +385,16 @@ router.get('/contactus', function (req, res, next) {
 				});
 			});
 		});
-	//}); //.listen(2019, ()=>{ console.log("Server is started") });
-
-
-
-
-
-
 
 });
-
 
 router.get('/', function(req, res, next) {
-  res.render('index.ejs', { 
-  title: 'Travel Experts',
-  name: loginName,
-  loggedstat: loggedIn
- });
-});
+	res.render('index.ejs', { 
+	title: 'Travel Experts',
+	name: loginName,
+	loggedstat: loggedIn
+   });
+  });
+
 
 module.exports = router;

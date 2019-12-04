@@ -3,16 +3,19 @@
 
 <head>
 	<meta name="author" content="Wade Grimm">
-
-	<title>Data Accepted</title>
+	<% include ./partials/bootStrapScripts.ejs %> 
+	<% include ./partials/commonHeaderContent.ejs %> 
+	
+	<script>
+			alert('<%=  popText %>');
+			setTimeout(function(){window.location.href = '\\'+'<%=  dest %>'}, 100);
+	</script>
+	
+	
 </head>
 
 <body>
 
-	<script>
-		alert("Thanks for submitting");
-		setTimeout(function(){window.location.href = "\\index"}, 100);
-	</script>
 	
 </body>
 
