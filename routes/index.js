@@ -43,7 +43,7 @@ router.post("/login_form", (req, res) => {
           //No email
           if (result == null) {
             //alert("This email is not in our records, please register on our site", "Register");
-            res.redirect("/registration"); //check naming
+            res.redirect("/noemail"); //check naming
           }
           //password checked and correct
           else if (userName === result.CustFirstName) {
@@ -58,7 +58,7 @@ router.post("/login_form", (req, res) => {
           }
           //if passwords do not match
           else {
-            loginName = "Incorrect Password";
+            res.redirect("/incorrectpass");
 			//res.send("Incorrect Password");
           }
         }
@@ -130,6 +130,14 @@ router.get('/thanksBook', function(req, res, next) {
 
 router.get('/regerror', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration'	});
+});
+
+router.get('/incorrectpass', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index'	});
+});
+
+router.get('/noemail', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration"	});
 });
 
 
