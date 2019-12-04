@@ -29,193 +29,101 @@
   </style>
 
   <title>Contact Us page</title>
+  <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,' +
+    'shrink-to-fit=no"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"' +
+    'integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">' +
+    '<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">' +
+    '<link rel="stylesheet" type="text/css" href="contactus.css"><title>Contact Us page</title></head>
 </head>
 
 <body>
-  <nav class="navbar navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="/index">Travel Experts</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
-      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <form class="form-inline mt-2 mt-md-0" action="/bouncer.php" method="post">
-            <input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="Email" name="navemail">
-            <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password"
-              name="navpassword">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
-          </form>
-        </li><br />
-        <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
-        <li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>
-        <li class="nav-item"> <a class="nav-link" href="/vacayPackages">Vacation Packages</a>
-        <li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <div class="jumbotron jumbotron-fluid"
-    style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;">
-    <div class="container text-center">
-      <h1>Contact Us</h1>
-    </div>
-  </div>
-
-  <div class="container-fluid bg-light text-dark">
-    <div class="row">
-      <div class="col-sm-3 col-md-6">
-
-        <h3>We are here to meet your travel needs</h3>
-        <p>Our dedication to customer service is the cornerstone of our company. If you have any question or requests,
-          please contact us</p><br />
+    <!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,' +
+      'shrink-to-fit=no"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"' +
+      'integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">' +
+      '<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">' +
+      '<link rel="stylesheet" type="text/css" href="contactus.css"><title>Contact Us page</title></head><body>');
 
 
-        <p><u>Main Office address</u></p>
-        <P>6820 Falconridge Blvd</P>
-        <p>Calgary, AB T3P 0V2</p>
-        <p><strong>Tel:</strong> (403) 287 6899, (403) 287 5342</p>
-        <p><strong>Toll Free:</strong> 1 (800) 256 4164</p>
-
-        <button type="button" class="btn btn-outline-secondary">Email Us</button>
-
-      </div>
-
-      <div class="col-sm-9 col-md-6">
-        <p>What Insight do you need today?</p> <br />
-
-        <form action="">
-          <div class="form-group">
-            <label for="fname"></label>
-            <input type="text" class="form-control" id="fname" placeholder="First Name*" required>
-          </div>
-          <div class="form-group">
-            <label for="lname"></label>
-            <input type="text" class="form-control" id="lname" placeholder="Last Name*" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email"></label>
-            <input type="email" class="form-control" id="email" placeholder="Email*" required>
-          </div>
-
-          <div class="form-group">
-            <label for="phone"></label>
-            <input type="text" class="form-control" id="phone" placeholder="Phone Number">
-          </div>
-
-          <div class="form-group">
-            <label for="addr"></label>
-            <input type="text" class="form-control" id="addr" placeholder="Please Enter your address">
-          </div>
-
-          <div class="form-group">
-            <label for="city"></label>
-            <input type="text" class="form-control" id="city" placeholder="City">
-          </div>
-
-          <div class="form-group">
-            <label for="prov"></label>
-            <select class="form-control" name="prov" id="prov">
-              <option value="">Select Province</option>
-              <option value="AB">Alberta</option>
-              <option value="BC">British Columbia</option>
-              <option value="MN">Manitoba</option>
-              <option value="NB">New Brunswick</option>
-              <option value="NL">Newfoundland and Labrador</option>
-              <option value="NS">Nova Scotia</option>
-              <option value="ON">Ontario</option>
-              <option value="QU">Quebec</option>
-              <option value="SK">Saskatchewan</option>
-            </select>
-          </div>
+    res.write('<div class="jumbotron jumbotron-fluid" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
+    res.write(' <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>')
 
 
-          <div class="form-group">
-            <label for="pcode"></label>
-            <input type="text" class="form-control" id="pcode" placeholder="Postal Code">
-          </div>
+    res.write('<div class="container">')
+    res.write("<p><strong>AGENCY 1</strong></p>")
+    res.write("<p><strong>Office Address:</strong> " + y[0].AgncyAddress + " " + y[0].AgncyCity + " " + y[0].AgncyProv + "  " + y[0].AgncyPostal + " " + y[0].AgncyCountry +
+      "<br/><strong>Phone: </strong>" + y[0].AgncyPhone + "<br/><strong>Fax: </strong>" + y[0].AgncyFax + "</p>");
+    res.write('</div>')
+
+    res.write('<div class="container"><div class="row">')
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-alisha-zhao.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+    // res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
+
+    res.write('<div class="row"><div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-hannah-dehradunwala.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[1].AgtFirstName + " " + x[1].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,mandarin</p></div></div></div></div></div>')
+    // res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://www.gannett-cdn.com/-mm-/229409e730ac32b7d0ddfbf289defd8b63486b6d/c=2-0-1498-1125/local/-/media/2017/02/27/CarolinaGroup/Asheville/636238105299759258-John-Shore-NEW.jpg?width=540&height=405&fit=crop" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[3].AgtFirstName + " " + x[3].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + x[3].AgtBusPhone + '<br/>' + x[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[4].AgtFirstName + " " + x[4].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + x[4].AgtBusPhone + '<br/>' + x[4].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+    res.write('</div></div><br/><br/><br/><br/><br/>')
 
 
-          <div class="form-group">
-            <label for="comment"></label>
-            <textarea class="form-control" rows="5" id="comment" placeholder="Comment"></textarea>
-          </div>
+    res.write('<div class="container">')
+    res.write("<p><strong>AGENCY 2</strong></p>")
+    res.write("<p><strong>Office Address:</strong> " + z[0].AgncyAddress + " " + z[0].AgncyCity + " " + z[0].AgncyProv + "  " + z[0].AgncyPostal + " " + z[0].AgncyCountry +
+      "<br/><strong>Phone: </strong>" + z[0].AgncyPhone + "<br/><strong>Fax: </strong>" + z[0].AgncyFax + "</p>");
+    res.write('</div>')
+
+    res.write('<div class="container"><div class="row">')
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+    res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+      '<img class="card-img-top" src="https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[3].AgtFirstName + " " + w[3].AgtLastName + '</h4><p class="card-text">' +
+      '<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+
+
+    res.write('</div></div><br/><br/><br/><br/><br/>')
+
+    res.write(' <footer><div class="jumbotron jumbotron-fluid"><p id="terms">COPYRIGHT &copy; 2019 Codecruisers Technologies Inc. All rights reserved<a href="">TERMS OF SALE &nbsp;|</a><a href="">TERMS OF USE &nbsp;|</a><a href="">RETURN POLICY &nbsp;|</a><a href="">PRIVACY POLICY &nbsp;|</a></p></div></div></footer>')
 
 
 
 
 
 
-
-          <div class="form-group form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox"> Remember me
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Submit</button>
-
-        </form><br />
-
-      </div>
-    </div>
-
-  </div>
-
-
-  <footer>
-    <div class="jumbotron">
-      <div class="row">
-        <nav class="nav">
-          <a class="nav-link active" href="#">Active</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link" href="#">Link</a>
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </nav>
-
-      </div>
-
-
-      <p>COPYRIGHT &copy; 2019 TRAVEL EXPERTS </p>
-      <div class="policy">
-        <a href="">TERMS OF SALE</a>&nbsp;|
-        <a href="">TERMS OF USE</a>&nbsp;&nbsp;|
-        <a href="">RETURN POLICY</a>&nbsp;|
-        <a href="">PRIVACY POLICY</a>&nbsp;|
-      </div>
+    res.write(' <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>');
+    res.write(' <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>');
+    res.write('<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>');
+    res.write("</body></html>");
 
 
 
-
-  </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
 </body>
 
 </html>
