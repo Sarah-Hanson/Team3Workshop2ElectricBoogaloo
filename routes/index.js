@@ -16,57 +16,54 @@ router.use(session(mySession));
 var loginName = "";
 var loggedIn = false;
 
-//login submission - Hamish
+//login submission - Hamish, password encryption check - Wade
 router.post("/login_form", (req, res) => {
+	const bcrypt = require('bcrypt'); // password encryption module
+	var userEmail = req.body.CustEmail;
+	var userPass = req.body.CustPassword;
+	var pwdHashed = false;
 
-  var userEmail = req.body.CustEmail;
-  var userPass = req.body.CustPassword;
-
-  //connecting to database
-  mongo.connect(url, {
-    useUnifiedTopology: true
-  }, (err, client) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(userEmail);
-      console.log("Connected to Database");
-
-      //find posted email
-      var dbo = client.db("travelexperts");
-      dbo.collection("customers").findOne({
-        CustEmail: userEmail
-      }, (err, result) => {
-        if (err) {
-          throw err;
-        } else {
-		  //No email
-		  console.log(result);
-		  console.log()
-          if (result == null) {
-            //alert("This email is not in our records, please register on our site", "Register");
-            res.redirect("/noemail"); //check naming
-          }
-          //password checked and correct
-          else if (userPass === result.CustPassword) {
-            console.log("Customer Name pass is correct");
-            loginName = result.CustFirstName;
-            loggedIn = true;
-            console.log("Login Name is: " + loginName);
-            console.log("Logged in: " + loggedIn);
-			//res.send("Welcome back " + loginName);
-			
-			res.redirect("/index");
-          }
-          //if passwords do not match
-          else {
-            res.redirect("/incorrectpass");
-			//res.send("Incorrect Password");
-          }
-        }
-      });
-    }
-  });
+	//connecting to database
+	mongo.connect(url, {
+		useUnifiedTopology: true
+	}, (err, client) => {
+		if (err) {
+			throw err;
+		} else {
+			console.log(userEmail);
+			console.log("Connected to Database");
+			//find posted email
+			var dbo = client.db("travelexperts");
+			dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result) => {
+				if (err) {
+					throw err;
+				} else {
+					//No email
+					console.log(result);
+					console.log()
+					if (result == null) {
+						res.redirect("/noemail"); //check naming
+					}
+					else {
+						//password checked and correct
+						bcrypt.compare(userPass, result.CustPassword, function (err, pwdResult) { // compare hashed password from db to password provided
+							if (pwdResult) {
+								console.log("Customer Name pass is correct");
+								loginName = result.CustFirstName;
+								loggedIn = true;
+								console.log("Login Name is: " + loginName);
+								console.log("Logged in: " + loggedIn);
+								res.redirect("/index");
+							}
+							else {  //if passwords do not match
+								res.redirect("/incorrectpass");
+							};
+						});
+					}
+				}
+			});
+		}
+	});
 });
 
 //Logout button - Hamish
@@ -75,24 +72,24 @@ router.post("/logout_form", (req, res) => {
 	loginName = "";
 	loggedIn = false;
 	res.redirect("/index");
-	
+
 });
 
 // Sarah Hanson
-router.get('/vacation', function(req, res) {
-    var db = req.db;
+router.get('/vacation', function (req, res) {
+	var db = req.db;
 
 	var collection = db.get('packages');
 	collection.find({}, {}, function (e, docs) {
 		// Send that array of stuff to the EJS page 'userlist' to make a web page with em all
-        res.render('vacayPackages.ejs', 
-		{ 
-			title : "Vacation Packages",
-            pkgList : docs,
-			name: loginName,
-			loggedstat: loggedIn
-        });
-    });
+		res.render('vacayPackages.ejs',
+			{
+				title: "Vacation Packages",
+				pkgList: docs,
+				name: loginName,
+				loggedstat: loggedIn
+			});
+	});
 });
 
 // Sarah Hanson
@@ -103,61 +100,61 @@ router.get('/pickapackage', function (req, res, next) {
 		collection.find({}, {}, function (e, docs) {
 			res.render('pickapackage.ejs', {
 				title: 'Choose your Destination!',
-				pkgList : docs,
-				pkgArr : JSON.stringify(docs),
-				pkgID : req.query.pkgID,
+				pkgList: docs,
+				pkgArr: JSON.stringify(docs),
+				pkgID: req.query.pkgID,
 				name: loginName,
 				loggedstat: loggedIn
 			});
 		});
 	}
 	else {
-          res.redirect("/pickError");
+		res.redirect("/pickError");
 	}
 });
 
 // Wade Grimm
-router.get('/registration', function(req, res, next) {
-  res.render('registration.ejs', { 
-  title: 'Client Registration',
-  name: loginName,
-  loggedstat: loggedIn 
-  });
+router.get('/registration', function (req, res, next) {
+	res.render('registration.ejs', {
+		title: 'Client Registration',
+		name: loginName,
+		loggedstat: loggedIn
+	});
 });
 
 // Wade Grimm
-router.get('/thanksReg', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted', dest: 'index' });
+router.get('/thanksReg', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Thanks for your data', popText: 'registration accepted', dest: 'index' });
 });
 
 // Sarah Hanson
-router.get('/thanksBook', function(req, res, next) {
-  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking', dest: 'index' });
+router.get('/thanksBook', function (req, res, next) {
+	res.render('thanks.ejs', { title: 'Thanks for booking', popText: 'thanks for booking', dest: 'index' });
 });
 
 router.get('/regerror', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration'	});
+	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration' });
 });
 
 router.get('/pickError', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Not logged in', popText: 'Please log in before booking a package', dest: 'registration'	});
+	res.render('thanks.ejs', { title: 'Not logged in', popText: 'Please log in before booking a package', dest: 'registration' });
 });
 
 router.get('/incorrectpass', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index'	});
+	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index' });
 });
 
 router.get('/noemail', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration"	});
+	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration" });
 });
 
 // Hamish
-router.get('/index', function(req, res, next) {
-  res.render('index.ejs', { 
-  title: 'Travel Experts',
-  name: loginName,
-  loggedstat: loggedIn
-  });
+router.get('/index', function (req, res, next) {
+	res.render('index.ejs', {
+		title: 'Travel Experts',
+		name: loginName,
+		loggedstat: loggedIn
+	});
 });
 
 
@@ -239,176 +236,177 @@ router.get('/contactus', function (req, res, next) {
 	var MongoClient = require('mongodb').MongoClient;
 	var url = "mongodb://localhost:27017/";
 	MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
-	//http.createServer(function (req, res) { MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, db) {
-			if (err) throw err;
-			var dbo = db.db("travelexperts");
-			var query = { AgencyId: 1 };
-			var query2 = { AgencyId: 2 };
+		//http.createServer(function (req, res) { MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, db) {
+		if (err) throw err;
+		var dbo = db.db("travelexperts");
+		var query = { AgencyId: 1 };
+		var query2 = { AgencyId: 2 };
 
 
-			dbo.collection("agencies").find(query, { projection: {
+		dbo.collection("agencies").find(query, {
+			projection: {
+				_id: 0,
+				AgncyAddress: 1,
+				AgncyCity: 1,
+				AgncyProv: 1,
+				AgncyPostal: 1,
+				AgncyCountry: 1,
+				AgncyPhone: 1,
+				AgncyFax: 1
+			}
+		}).toArray(function (err, data) {
+			dbo.collection("agents").find(query, {
+				projection: {
 					_id: 0,
-					AgncyAddress: 1,
-					AgncyCity: 1,
-					AgncyProv: 1,
-					AgncyPostal: 1,
-					AgncyCountry: 1,
-					AgncyPhone: 1,
-					AgncyFax: 1
+					AgtFirstName: 1,
+					AgtLastName: 1,
+					AgtEmail: 1,
+					AgtBusPhone: 1
 				}
-			}).toArray(function (err, data) {
-				dbo.collection("agents").find(query, {
+			}).toArray(function (err, result) {
+				if (err) throw err;
+				var x = result;
+				var y = data;
+				console.log(y);
+				console.log(x);
+
+				dbo.collection("agencies").find(query2, {
 					projection: {
 						_id: 0,
-						AgtFirstName: 1,
-						AgtLastName: 1,
-						AgtEmail: 1,
-						AgtBusPhone: 1
+						AgncyAddress: 1,
+						AgncyCity: 1,
+						AgncyProv: 1,
+						AgncyPostal: 1,
+						AgncyCountry: 1,
+						AgncyPhone: 1,
+						AgncyFax: 1
 					}
-				}).toArray(function (err, result) {
-					if (err) throw err;
-					var x = result;
-					var y = data;
-					console.log(y);
-					console.log(x);
-
-					dbo.collection("agencies").find(query2, {
+				}).toArray(function (err, data) {
+					dbo.collection("agents").find(query2, {
 						projection: {
 							_id: 0,
-							AgncyAddress: 1,
-							AgncyCity: 1,
-							AgncyProv: 1,
-							AgncyPostal: 1,
-							AgncyCountry: 1,
-							AgncyPhone: 1,
-							AgncyFax: 1
+							AgtFirstName: 1,
+							AgtLastName: 1,
+							AgtEmail: 1,
+							AgtBusPhone: 1
 						}
-					}).toArray(function (err, data) {
-						dbo.collection("agents").find(query2, {
-							projection: {
-								_id: 0,
-								AgtFirstName: 1,
-								AgtLastName: 1,
-								AgtEmail: 1,
-								AgtBusPhone: 1
-							}
-						}).toArray(function (err, result) {
-							if (err) throw err;
-							var w = result;
-							var z = data;
-							console.log(w);
-							console.log(z);
+					}).toArray(function (err, result) {
+						if (err) throw err;
+						var w = result;
+						var z = data;
+						console.log(w);
+						console.log(z);
 
 
 
 
-							res.writeHead(200, {
-								"Content-Type": "text/html"
-							});
-							res.write('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,' +
-								'shrink-to-fit=no"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"' +
-								'integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">' +
-								'<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">' +
-								'<link rel="stylesheet" type="text/css" href="contactus.css"><title>Contact Us page</title></head><body>');
-
-
-							res.write('<div class="jumbotron jumbotron-fluid" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
-							res.write(' <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>')
-
-
-							res.write('<div class="container">')
-							res.write("<p><strong>AGENCY 1</strong></p>")
-							res.write("<p><strong>Office Address:</strong> " + y[0].AgncyAddress + " " + y[0].AgncyCity + " " + y[0].AgncyProv + "  " + y[0].AgncyPostal + " " + y[0].AgncyCountry +
-								"<br/><strong>Phone: </strong>" + y[0].AgncyPhone + "<br/><strong>Fax: </strong>" + y[0].AgncyFax + "</p>");
-							res.write('</div>')
-
-							res.write('<div class="container"><div class="row">')
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt4.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
-							// res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt5.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[1].AgtFirstName + " " + x[1].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,mandarin</p></div></div></div></div>')
-							// res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="=/agentt2.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt10.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[3].AgtFirstName + " " + x[3].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + x[3].AgtBusPhone + '<br/>' + x[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt8.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[4].AgtFirstName + " " + x[4].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + x[4].AgtBusPhone + '<br/>' + x[4].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
-							res.write('</div></div><br/><br/><br/><br/><br/>')
-
-
-							res.write('<div class="container">')
-							res.write("<p><strong>AGENCY 2</strong></p>")
-							res.write("<p><strong>Office Address:</strong> " + z[0].AgncyAddress + " " + z[0].AgncyCity + " " + z[0].AgncyProv + "  " + z[0].AgncyPostal + " " + z[0].AgncyCountry +
-								"<br/><strong>Phone: </strong>" + z[0].AgncyPhone + "<br/><strong>Fax: </strong>" + z[0].AgncyFax + "</p>");
-							res.write('</div>')
-
-							res.write('<div class="container"><div class="row">')
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt3.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
-
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt7.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
-
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<img class="card-img-top" src="/agentt6.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
-								'<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
-
-
-							res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-								'<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
-
-
-
-
-							res.write('</div></div><br/><br/><br/><br/><br/>')
-
-							res.write(' <footer><div class="jumbotron jumbotron-fluid"><p id="terms">COPYRIGHT &copy; 2019 Codecruisers Technologies Inc. All rights reserved<a href="">TERMS OF SALE &nbsp;|</a><a href="">TERMS OF USE &nbsp;|</a><a href="">RETURN POLICY &nbsp;|</a><a href="">PRIVACY POLICY &nbsp;|</a></p></div></div></footer>')
-
-
-
-
-
-
-							res.write(' <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>');
-							res.write(' <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>');
-							res.write('<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>');
-							res.write("</body></html>");
-							res.end();
-
-
-							db.close();
-
-
+						res.writeHead(200, {
+							"Content-Type": "text/html"
 						});
+						res.write('<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1,' +
+							'shrink-to-fit=no"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"' +
+							'integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">' +
+							'<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">' +
+							'<link rel="stylesheet" type="text/css" href="contactus.css"><title>Contact Us page</title></head><body>');
+
+
+						res.write('<div class="jumbotron jumbotron-fluid" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
+						res.write(' <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>')
+
+
+						res.write('<div class="container">')
+						res.write("<p><strong>AGENCY 1</strong></p>")
+						res.write("<p><strong>Office Address:</strong> " + y[0].AgncyAddress + " " + y[0].AgncyCity + " " + y[0].AgncyProv + "  " + y[0].AgncyPostal + " " + y[0].AgncyCountry +
+							"<br/><strong>Phone: </strong>" + y[0].AgncyPhone + "<br/><strong>Fax: </strong>" + y[0].AgncyFax + "</p>");
+						res.write('</div>')
+
+						res.write('<div class="container"><div class="row">')
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt4.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+						// res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt5.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[1].AgtFirstName + " " + x[1].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,mandarin</p></div></div></div></div>')
+						// res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="=/agentt2.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt10.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[3].AgtFirstName + " " + x[3].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + x[3].AgtBusPhone + '<br/>' + x[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt8.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[4].AgtFirstName + " " + x[4].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + x[4].AgtBusPhone + '<br/>' + x[4].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+						res.write('</div></div><br/><br/><br/><br/><br/>')
+
+
+						res.write('<div class="container">')
+						res.write("<p><strong>AGENCY 2</strong></p>")
+						res.write("<p><strong>Office Address:</strong> " + z[0].AgncyAddress + " " + z[0].AgncyCity + " " + z[0].AgncyProv + "  " + z[0].AgncyPostal + " " + z[0].AgncyCountry +
+							"<br/><strong>Phone: </strong>" + z[0].AgncyPhone + "<br/><strong>Fax: </strong>" + z[0].AgncyFax + "</p>");
+						res.write('</div>')
+
+						res.write('<div class="container"><div class="row">')
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt3.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt7.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<img class="card-img-top" src="/agentt6.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
+							'<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+							'<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+
+
+
+
+						res.write('</div></div><br/><br/><br/><br/><br/>')
+
+						res.write(' <footer><div class="jumbotron jumbotron-fluid"><p id="terms">COPYRIGHT &copy; 2019 Codecruisers Technologies Inc. All rights reserved<a href="">TERMS OF SALE &nbsp;|</a><a href="">TERMS OF USE &nbsp;|</a><a href="">RETURN POLICY &nbsp;|</a><a href="">PRIVACY POLICY &nbsp;|</a></p></div></div></footer>')
+
+
+
+
+
+
+						res.write(' <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>');
+						res.write(' <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>');
+						res.write('<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>');
+						res.write("</body></html>");
+						res.end();
+
+
+						db.close();
+
+
 					});
 				});
 			});
 		});
+	});
 
 });
 
-router.get('/', function(req, res, next) {
-	res.render('index.ejs', { 
-	title: 'Travel Experts',
-	name: loginName,
-	loggedstat: loggedIn
-   });
-  });
+router.get('/', function (req, res, next) {
+	res.render('index.ejs', {
+		title: 'Travel Experts',
+		name: loginName,
+		loggedstat: loggedIn
+	});
+});
 
 
 module.exports = router;
