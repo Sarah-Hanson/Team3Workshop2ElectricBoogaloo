@@ -75,7 +75,8 @@ app.post("/post_form", (req, res) => {
       if (result!= null) {
         //console.log("User Exists");
         db.close();
-        res.send("/UserExists");
+        //res.send("/UserExists");
+        res.redirect("/regerror");
       } else {
 
         dbo.collection("customers").find().sort({ CustomerId: -1 }).toArray((err, result) => {
