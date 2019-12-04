@@ -40,7 +40,9 @@ router.post("/login_form", (req, res) => {
         if (err) {
           throw err;
         } else {
-          //No email
+		  //No email
+		  console.log(result);
+		  console.log()
           if (result == null) {
             //alert("This email is not in our records, please register on our site", "Register");
             res.redirect("/noemail"); //check naming
