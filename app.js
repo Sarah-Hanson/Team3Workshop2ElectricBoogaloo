@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var monk = require('monk');
+const session = require('express-session');
 var db = monk('localhost:27017/travelexperts');
 var formData = [];
 const mongo = require("mongodb").MongoClient;
@@ -16,6 +17,8 @@ var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 
 var app = express();
+app.use(session({secret:'password'}));
+var mySession;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -180,6 +183,10 @@ app.post("/login_form", (req, res) => {
             console.log("Login Name is: " + loginName);
             console.log("Logged in: " + loggedIn);
 			res.send("Welcome back " + loginName);
+			mySession=req.session;
+			mySession.email = userEmail;
+			mySession.name = loginName;
+			console.log("THIS WORKED?!" + mySession.name);
           }
           //if passwords do not match
           else {
