@@ -20,7 +20,7 @@ var loggedIn = false;
 router.post("/login_form", (req, res) => {
 
   var userEmail = req.body.CustEmail;
-  var userName = req.body.CustFirstName;
+  var userPass = req.body.CustPassword;
 
   //connecting to database
   mongo.connect(url, {
@@ -46,7 +46,7 @@ router.post("/login_form", (req, res) => {
             res.redirect("/registration"); //check naming
           }
           //password checked and correct
-          else if (userName === result.CustFirstName) {
+          else if (userPass === result.CustPassword) {
             console.log("Customer Name pass is correct");
             loginName = result.CustFirstName;
             loggedIn = true;
