@@ -118,29 +118,44 @@ app.post("/post_booking", function(req, res) {
 	var db = req.db;
 	var pkgNum = req.body.packageNum;
 	var travellers = req.body.travellers;
-	
 	var collection = db.get('bookings');
 	
-	collection.insert({
-			"BookingId":11,
-			"BookingDate":new Date(),
-			"BookingNo":"DFS3",
-			"TravelerCount":travellers,
-			"CustomerId":143,
-			"TripTypeId":"B",
-			"PackageId":pkgNum
-		},
+	var bookingID;
+	var bookingArr;
+	collection.find({},{},function(e,docs){
+		docs = sort_by_key(docs,"BookingId");
+		bookingArr = docs;
+		console.log(docs[0]);
+		bookingID = docs[0].BookingId+1;
+
+		collection.insert({
+				"BookingId":bookingID,
+				"BookingDate":new Date(),
+				"BookingNo":"DFS3",
+				"TravelerCount":travellers,
+				"CustomerId":143, //When login works, get it
+				"PackageId":pkgNum
+			},
 			function(err, doc) {
 				if (err) {
 					res.send("problem adding to db");
 				}
 				else {
+					console.log(bookingID);
 					res.redirect("/vacation");
 				}
-			
 			});
+		});
 });
 
+function sort_by_key(array, key)
+{
+ return array.sort(function(a, b)
+ {
+  var x = a[key]; var y = b[key];
+  return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+ });
+}
 
 //login submission
 app.post("/login_form", (req, res) => {
