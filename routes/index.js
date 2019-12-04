@@ -114,11 +114,14 @@ router.get('/registration', function(req, res, next) {
   });
 });
 
-router.get('/thanks', function (req, res, next) {
-	res.render('thanks.ejs', {
-		title: 'Thanks for your data'
-	});
+
+router.get('/thanksReg', function(req, res, next) {
+  res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted' });
 });
+
+router.get('/thanksBook', function(req, res, next) {
+  res.render('thanks.ejs', { title: 'Thanks for booking', popText:'thanks for booking' });
+
 
 router.get('/regerror', function (req, res, next) {
 	res.render('regerror.ejs', {
