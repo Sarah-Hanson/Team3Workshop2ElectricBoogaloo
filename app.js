@@ -17,8 +17,6 @@ var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 
 var app = express();
-app.use(session({secret:'password'}));
-var mySession;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -140,62 +138,6 @@ app.post("/post_booking", function(req, res) {
 				}
 			
 			});
-});
-
-
-//login submission
-app.post("/login_form", (req, res) => {
-
-  var loggedIn = false;
-  var loginName = "";
-
-  var userEmail = req.body.CustEmail;
-  var userName = req.body.CustFirstName;
-
-  //connecting to database
-  mongo.connect(url, {
-    useUnifiedTopology: true
-  }, (err, client) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(userEmail);
-      console.log("Connected to Database");
-
-      //find posted email
-      var dbo = client.db("travelexperts");
-      dbo.collection("customers").findOne({
-        CustEmail: userEmail
-      }, (err, result) => {
-        if (err) {
-          throw err;
-        } else {
-          //No email
-          if (result == null) {
-            //alert("This email is not in our records, please register on our site", "Register");
-            res.redirect("/registration"); //check naming
-          }
-          //password checked and correct
-          else if (userName === result.CustFirstName) {
-            console.log("Customer Name pass is correct");
-            loginName = result.CustFirstName;
-            loggedIn = true;
-            console.log("Login Name is: " + loginName);
-            console.log("Logged in: " + loggedIn);
-			res.send("Welcome back " + loginName);
-			mySession=req.session;
-			mySession.email = userEmail;
-			mySession.name = loginName;
-			console.log("THIS WORKED?!" + mySession.name);
-          }
-          //if passwords do not match
-          else {
-            res.send("Incorrect Password");
-          }
-        }
-      });
-    }
-  });
 });
 
 // catch 404 and forward to error handler
