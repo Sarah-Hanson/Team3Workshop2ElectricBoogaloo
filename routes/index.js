@@ -126,11 +126,6 @@ router.get('/regerror', function (req, res, next) {
 	});
 });
 
-router.get('/index', function (req, res, next) {
-	res.render('index.ejs', {
-		title: 'Travel Experts'
-	});
-});
 
 router.get('/index', function(req, res, next) {
   res.render('index.ejs', { 
@@ -140,13 +135,13 @@ router.get('/index', function(req, res, next) {
   });
 });
 
-// router.get('/contactus', function(req, res, next) {
-//   res.render('contactus.ejs', { 
-//   title: 'Contact Us',
-//   name: loginName,
-//   loggedstat: loggedIn
-//  });
-// });
+router.get('/contactus', function(req, res, next) {
+  res.render('contactus.ejs', { 
+  title: 'Contact Us',
+  name: loginName,
+  loggedstat: loggedIn
+ });
+});
 
 //Updates the base travelExperts DB with a couple extra fields and documents
 router.get('/updateDB', function (req, res, next) {

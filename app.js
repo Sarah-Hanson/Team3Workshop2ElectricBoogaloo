@@ -64,7 +64,8 @@ app.post("/post_form", (req, res) => {
   formData[8] = req.body.busphone;
   formData[9] = req.body.email;
   formData[10] = req.body.password;
-  var clientID = "";
+  
+  
   mongo.connect(url, { useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
     //console.log("connected");
