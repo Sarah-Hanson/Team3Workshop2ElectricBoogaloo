@@ -24,39 +24,24 @@
 			var curPkg = getMatch(el);
 			if (curPkg!=null) {
 
-				var pkgStartFormatted = new Date(curPkg.PkgStartDate).toISOString().replace(/-/g, '').split('T')[0];
-				var pkgEndFormatted = new Date(curPkg.PkgEndDate).toISOString().replace(/-/g, '').split('T')[0];
+				var pkgStartFormatted = new Date(curPkg.PkgStartDate).toISOString().replace(/-/g, '/').split('T')[0];
+				var pkgEndFormatted = new Date(curPkg.PkgEndDate).toISOString().replace(/-/g, '/').split('T')[0];
 
 				document.getElementById("pkgStart").value 	= pkgStartFormatted;
 				document.getElementById("pkgEnd").value 	= pkgEndFormatted;
 				
 				var now = new Date();
 				// setting package date as a YYY-MM-DD format, might be easier ways to do this??
-				var now1 = new Date(curPkg.PkgStartDate);
-				var testVar = "";
-				var testVar1 = "";
-				//Remove the time values from the Date
-				var formatted_date = (new Date()).toISOString().replace(/-/g, '').split('T')[0];
-				console.log(formatted_date);
-				//Remove time values from Date
-				var formatted_date1 = (now1.toISOString().replace(/-/g, '').split('T')[0]);
-				console.log(formatted_date1);
-
+				var then = new Date(curPkg.PkgStartDate);
 				
-				testvar = curPkg.PkgStartDate <= now;
-				testvar1 = formatted_date1 <= formatted_date;
-				console.log(curPkg.PkgStartDate);
-				console.log(now.getFullYear() + "-" + (now.getMonth() +1) + "-" + now.getDate());
-				//Previous test kept failing as they weren't the same data
-				console.log("Currpkg test "+ testvar);
-				//This test returns true as the comparison is better
-				console.log("Currpkg test1 "+ testvar1);
-				
-				if (curPkg.PkgStartDate <= now) {
+				if (then <= now) {
 					document.getElementById("pkgStart").style.color = "red";
+					document.getElementById("pkgEnd").style.color = "red";
 				}
 				else {
-					console.log("> Package date is good")
+					document.getElementById("pkgStart").style.color = "black";
+					document.getElementById("pkgEnd").style.color = "black";
+					console.log("> Package date is good");
 				}
 			}
 		}
@@ -101,20 +86,20 @@
 					<img class="img-responsive img-fluid mx-auto rounded-circle" src="">
 				</div>
 				<div class="form-row">
-					<div class="form-group col-9">
+					<div class="d-flex form-group col-9 align-content right">
 						<div class="col">
 							<label for="pkgStart"> Start Date </label>
-							<input type="text" class="form-control" placeholder="end date" id="pkgEnd" name="end" readonly>
+							<input type="text" class="form-control text-center" placeholder="start date" id="pkgStart" name="end" readonly>
 						</div>
 						<div class="col">
 							<label for="pkgEnd"> End Date </label>
-							<input type="text" class="form-control" placeholder="start date" id="pkgStart" name="start" readonly>
+							<input type="text" class="form-control text-center" placeholder="end date" id="pkgEnd" name="start" readonly>
 						</div>
 					</div>
 				</div>
 				<div class= "form-row">
 					<label for="travellers"> Travellers </label> &nbsp;
-					<input type="number" id="travellers" min="1" name="travellers"> 
+					<input type="number" id="travellers" min="1" name="travellers" required="true"> 
 				</div>
 				<button type="submit" class="btn btn-primary" > Book Now </button>
 			</form>	

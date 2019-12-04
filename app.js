@@ -112,6 +112,7 @@ app.post("/post_form", (req, res) => {
   });
 });
 
+//booking post added by Sarah
 app.post("/post_booking", function(req, res) {
 	var db = req.db;
 	var pkgNum = req.body.packageNum;
