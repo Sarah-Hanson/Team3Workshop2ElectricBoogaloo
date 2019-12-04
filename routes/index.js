@@ -12,7 +12,7 @@ var mySession = {
 router.use(session(mySession));
 
 var loginName = "";
-var loggedIn = "false";
+var loggedIn = false;
 
 //login submission
 router.post("/login_form", (req, res) => {
@@ -63,6 +63,15 @@ router.post("/login_form", (req, res) => {
       });
     }
   });
+});
+
+//Logout button
+router.post("/logout_form", (req, res) => {
+
+	loginName = "";
+	loggedIn = false;
+	res.redirect("/index");
+	
 });
 
 router.get('/vacation', function(req, res) {

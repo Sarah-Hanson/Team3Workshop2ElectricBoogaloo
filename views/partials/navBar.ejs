@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="/index">Travel Experts <%=(name) %></a>
+    <a class="navbar-brand" href="/index">Travel Experts <%= (name) %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
         aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,6 +14,9 @@
                         aria-label="Password" name="CustFirstName">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
                 </form>
+				<form action="/logout_form" method="post">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+				</form>
             </li><br />
             <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
             <li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>
