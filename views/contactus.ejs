@@ -18,25 +18,30 @@
         <!-- Main div-->
         <!-- Add Navigation bar -->
         <% include ./partials/navBar.ejs %> 
+        
     <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>
 
 
     <div class="container">
-    res.write("<p><strong>AGENCY 1</strong></p>")
-    res.write("<p><strong>Office Address:</strong> " + y[0].AgncyAddress + " " + y[0].AgncyCity + " " + y[0].AgncyProv + "  " + y[0].AgncyPostal + " " + y[0].AgncyCountry +
-      "<br/><strong>Phone: </strong>" + y[0].AgncyPhone + "<br/><strong>Fax: </strong>" + y[0].AgncyFax + "</p>");
+    <p><strong>AGENCY 1</strong></p>
+    <% 
+				var i = 0;				
+				i=0;
+				for( i; i<agcyList.length; i++) {
+					featureImgs += <p><strong>Office Address:</strong> " + y[0].AgncyAddress + " " + y[0].AgncyCity + " " + y[0].AgncyProv + "  " + y[0].AgncyPostal + " " + y[0].AgncyCountry +
+      "<br/><strong>Phone: </strong>" + y[0].AgncyPhone + "<br/><strong>Fax: </strong>" + y[0].AgncyFax + "</p>
+				}
+			%>
     </div>
 
     <div class="container"><div class="row">
     <div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
       '<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-alisha-zhao.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
       '<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>
-    // res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
 
     <div class="row"><div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
       '<img class="card-img-top" src="https://www.lorealparisusa.com/~/media/images/lop/wow-data/honorees/2018/loreal-paris-wow-honorees-bios-main-hannah-dehradunwala.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[1].AgtFirstName + " " + x[1].AgtLastName + '</h4><p class="card-text">' +
       '<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,mandarin</p></div></div></div></div></div>
-    // res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
 
     <div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
       '<img class="card-img-top" src="https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
@@ -53,9 +58,9 @@
 
 
     <div class="container">
-    res.write("<p><strong>AGENCY 2</strong></p>")
-    res.write("<p><strong>Office Address:</strong> " + z[0].AgncyAddress + " " + z[0].AgncyCity + " " + z[0].AgncyProv + "  " + z[0].AgncyPostal + " " + z[0].AgncyCountry +
-      "<br/><strong>Phone: </strong>" + z[0].AgncyPhone + "<br/><strong>Fax: </strong>" + z[0].AgncyFax + "</p>");
+    <p><strong>AGENCY 2</strong></p>
+    <p><strong>Office Address:</strong> " + z[0].AgncyAddress + " " + z[0].AgncyCity + " " + z[0].AgncyProv + "  " + z[0].AgncyPostal + " " + z[0].AgncyCountry +
+      "<br/><strong>Phone: </strong>" + z[0].AgncyPhone + "<br/><strong>Fax: </strong>" + z[0].AgncyFax + "</p>;
     </div>
 
     <div class="container"><div class="row">
