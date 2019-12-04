@@ -12,7 +12,7 @@ var mySession = {
 router.use(session(mySession));
 
 var loginName = "";
-var loggedIn = "false";
+var loggedIn = false;
 
 //login submission
 router.post("/login_form", (req, res) => {
@@ -65,8 +65,17 @@ router.post("/login_form", (req, res) => {
   });
 });
 
-router.get('/vacation', function (req, res) {
-	var db = req.db;
+//Logout button
+router.post("/logout_form", (req, res) => {
+
+	loginName = "";
+	loggedIn = false;
+	res.redirect("/index");
+	
+});
+
+router.get('/vacation', function(req, res) {
+    var db = req.db;
 
 	var collection = db.get('packages');
 	collection.find({}, {}, function (e, docs) {
