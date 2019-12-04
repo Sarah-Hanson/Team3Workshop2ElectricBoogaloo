@@ -1,3 +1,5 @@
+// Main contributors Sarah, Hamish and Wade
+
 var express = require('express');
 const session = require('express-session');
 var router = express.Router();
@@ -14,7 +16,7 @@ router.use(session(mySession));
 var loginName = "";
 var loggedIn = false;
 
-//login submission
+//login submission - Hamish
 router.post("/login_form", (req, res) => {
 
   var userEmail = req.body.CustEmail;
@@ -65,7 +67,7 @@ router.post("/login_form", (req, res) => {
   });
 });
 
-//Logout button
+//Logout button - Hamish
 router.post("/logout_form", (req, res) => {
 
 	loginName = "";
@@ -74,6 +76,7 @@ router.post("/logout_form", (req, res) => {
 	
 });
 
+// Sarah Hanson
 router.get('/vacation', function(req, res) {
     var db = req.db;
 
@@ -90,6 +93,7 @@ router.get('/vacation', function(req, res) {
     });
 });
 
+// Sarah Hanson
 router.get('/pickapackage', function (req, res, next) {
 	var db = req.db;
 	var collection = db.get('packages');
@@ -106,6 +110,7 @@ router.get('/pickapackage', function (req, res, next) {
 	console.log()
 });
 
+// Wade Grimm
 router.get('/registration', function(req, res, next) {
   res.render('registration.ejs', { 
   title: 'Client Registration',
@@ -114,7 +119,7 @@ router.get('/registration', function(req, res, next) {
   });
 });
 
-
+// Wade Grimm
 router.get('/thanksReg', function(req, res, next) {
   res.render('thanks.ejs', { title: 'Thanks for your data', popText:'registration accepted' });
 });
@@ -124,9 +129,7 @@ router.get('/thanksBook', function(req, res, next) {
 });
 
 router.get('/regerror', function (req, res, next) {
-	res.render('regerror.ejs', {
-		title: 'Data Exists'
-	});
+	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error'	});
 });
 
 

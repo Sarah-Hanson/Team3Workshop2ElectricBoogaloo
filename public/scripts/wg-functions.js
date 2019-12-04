@@ -4,8 +4,7 @@
 var myReg = /^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z][ ]?[0-9][ABCEGHJ-NPRSTV-Z][0-9]$/i;
 
 //Functions Start
-
-
+// Use RegEx to validate Postal code
 function fnValidatePostal(postal) {
     if (myReg.test(postal)) {
         return true;
@@ -14,7 +13,8 @@ function fnValidatePostal(postal) {
     }
 }
 
-
+// Validate all form fields have data, if not highlight missing in red
+// and set focus on first blank/invalid field
 function fnFormValidate() {
     var myform = document.forms.namedItem("regForm");
     var focusSet = false;
@@ -51,16 +51,11 @@ function fnFormValidate() {
     }
 }
 
-
+// Clears the form data and resets background colors
 function fnClearForm() {
     var myform = document.forms.namedItem("regForm");
     for (i = 0; i < myform.elements.length; i++) {
         myform.elements[i].style.backgroundColor = "";
         myform.elements[i].value = "";
     }
-}
-
-function fnSubmit(){
-
-    alert("Data Submitted");
 }
