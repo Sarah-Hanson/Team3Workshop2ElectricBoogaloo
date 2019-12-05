@@ -28,7 +28,8 @@
                         name="CustEmail">
                     <input class="form-control mr-sm-2" type="password" placeholder="Password"
                         aria-label="Password" name="CustPassword">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="action();">Login</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Login</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="/logout_form" id="hide">Logout</button>
 				</form>
             </li><br />
             <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
@@ -37,8 +38,6 @@
             <li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>	
             </li>
         </ul>
-			<form action="/logout_form" method="post">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="hide">Logout</button>
-			</form>
+			
     </div>
 </nav>
