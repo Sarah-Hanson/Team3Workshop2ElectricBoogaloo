@@ -20,7 +20,7 @@ router.use(session(mySession));
 //login submission - Hamish, password encryption check - Wade
 router.post("/login_form", (req, res) => {
 	const bcrypt = require('bcrypt'); // password encryption module
-	var userEmail = req.body.CustEmail;
+	var userEmail = req.body.CustEmail.toLowerCase();
 	var userPass = req.body.CustPassword;
 	var pwdHashed = false;
 

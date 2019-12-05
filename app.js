@@ -66,7 +66,7 @@ app.post("/post_form", (req, res) => {
   formData[6] = req.body.postal;
   formData[7] = req.body.homephone;
   formData[8] = req.body.busphone;
-  formData[9] = req.body.email;
+  formData[9] = req.body.email.toLowerCase();
   bcrypt.genSalt(saltRounds, function (err, salt) {
     bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
       //console.log("Plain pwd: " + myPlaintextPassword);
