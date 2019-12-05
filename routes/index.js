@@ -358,7 +358,7 @@ router.get('/contactus', function (req, res, next) {
 								'<form action="/logout_form" method="post">'+
 									'<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>'+
 								'</form></div></nav>');
-						res.write('<div class="jumbotron jumbotron-fluid" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
+						res.write('<div class="jumbotron jumbotron-fluid sticky-top pt-50" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
 						res.write(' <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>')
 
 
