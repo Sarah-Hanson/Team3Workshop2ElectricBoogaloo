@@ -232,7 +232,7 @@ router.get('/updateDB', function (req, res, next) {
 });
 
 
-//Sarah
+//Created by Sarah, modified by Wade
 router.get('/updateDB2', function (req, res, next) {
 	// var db = req.db;
 	// var collection = db.get('customers');
@@ -254,7 +254,7 @@ router.get('/updateDB2', function (req, res, next) {
 
 
 
-// Imported by Wade Grimm, Integrating Raymonds changes from a seperate Git repository into the main work Sarah, Hamish
+// Imported formatted and code additons by Wade Grimm, Integrating Raymonds changes from a seperate Git repository into the main work Sarah, Hamish
 // and Wade have been using all along
 
 router.get('/contactus', function (req, res, next) {
@@ -334,8 +334,29 @@ router.get('/contactus', function (req, res, next) {
 							'integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">' +
 							'<link href="https://fonts.googleapis.com/css?family=Ibarra+Real+Nova:400i&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Baskervville&display=swap" rel="stylesheet">' +
 							'<link rel="stylesheet" type="text/css" href="contactus.css"><title>Contact Us page</title></head><body>');
-
-
+// Navbar added by Wade Grimm to allow traversing the entire site in a fluid manner.
+						res.write('<nav class="navbar navbar-dark fixed-top bg-dark">' +
+						'<a class="navbar-brand" href="/index">Travel Experts</a>' +
+						'<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"' +
+							'aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">' +
+							'<span class="navbar-toggler-icon"></span> </button>'+
+						'<div class="collapse navbar-collapse" id="navbarCollapse">'+
+							'<ul class="navbar-nav mr-auto">'+
+								'<li class="nav-item active">'+
+									'<form class="form-inline mt-2 mt-md-0" action="/login_form" method="post">'+
+										'<input class="form-control mr-sm-2" type="text" placeholder="Email" aria-label="Email" name="CustEmail">'+
+										'<input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" name="CustPassword">'+
+										'<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button></form>'+
+								'</li><br />'+
+								'<li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>'+
+								'<li class="nav-item"> <a class="nav-link" href="/ContactUs">Contact Us</a>'+
+								'<li class="nav-item"> <a class="nav-link" href="/vacation">Vacation Packages</a>'+
+								'<li class="nav-item"> <a class="nav-link" href="/registration">Client Registration</a>	'+
+								'</li>'+
+							'</ul>'+
+								'<form action="/logout_form" method="post">'+
+									'<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>'+
+								'</form></div></nav>');
 						res.write('<div class="jumbotron jumbotron-fluid" style="background-image: url(https://media.architecturaldigest.com/photos/5d77e96ed6d1d60008832ccc/master/pass/GettyImages-513939550.jpg);background-size: 100% 100%;"><div class="container text-center"><h1>Contact Us</h1></div></div>');
 						res.write(' <div class="container"><div><h3>We are here to meet your travel needs</h3><p>Our dedication to customer service is the cornerstone of our company.If you have any question or requests,our Specialists are willing and ready to help.<p>Please feel free to speak with any one of them</p></p></div></div><br/><br/>')
 
@@ -358,7 +379,7 @@ router.get('/contactus', function (req, res, next) {
 						// res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-							'<img class="card-img-top" src="=/agentt2.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
+							'<img class="card-img-top" src="/agentt2.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
 							'<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
@@ -379,21 +400,22 @@ router.get('/contactus', function (req, res, next) {
 
 						res.write('<div class="container"><div class="row">')
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-							'<img class="card-img-top" src="/agentt3.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
+							'<img class="card-img-top" src="/agentt6.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
 							'<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-							'<img class="card-img-top" src="/agentt7.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
+							'<img class="card-img-top" src="/agentt11.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
 							'<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
-							'<img class="card-img-top" src="/agentt6.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
+							'<img class="card-img-top" src="/agentt3.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
 							'<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
+						'<img class="card-img-top" src="/agentt.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[3].AgtFirstName + " " + w[3].AgtLastName + '</h4><p class="card-text">' +
 							'<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
 
 
