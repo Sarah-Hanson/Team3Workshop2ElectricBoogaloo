@@ -132,18 +132,22 @@ router.get('/thanksBook', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Thanks for booking', popText: 'thanks for booking', dest: 'index' });
 });
 
+// Wade Grimm
 router.get('/regerror', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration' });
 });
 
+// Sarah? Hamish?
 router.get('/pickError', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Not logged in', popText: 'Please log in before booking a package', dest: 'registration' });
 });
 
+// Hamish
 router.get('/incorrectpass', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index' });
 });
 
+// Hamish
 router.get('/noemail', function (req, res, next) {
 	res.render('thanks.ejs', { title: 'Invalid Email', popText: 'Not a valid email, please register first', dest: "registration" });
 });
@@ -159,7 +163,7 @@ router.get('/index', function (req, res, next) {
 
 
 
-//Updates the base travelExperts DB with a couple extra fields and documents
+//Updates the base travelExperts DB with a couple extra fields and documents - Sarah
 router.get('/updateDB', function (req, res, next) {
 	var db = req.db;
 	var collection = db.get('packages');
@@ -227,10 +231,22 @@ router.get('/updateDB', function (req, res, next) {
 	});
 });
 
+
+//Sarah
 router.get('/updateDB2', function (req, res, next) {
-	var db = req.db;
-	var collection = db.get('packages');
-	collection.update({}, {$set: {"CustPassword": "password"}}, false, true);
+	// var db = req.db;
+	// var collection = db.get('customers');
+	// collection.updateMany( {}, {$set: {"CustPassword": "password"}}, false, true);
+	mongo.connect(url, { useUnifiedTopology: true }, (err, db) => {
+		if (err) throw err;
+		//console.log("connected");
+		var dbo = db.db("travelexperts");
+	
+		//console.log("CustFirstName: " + formData[0] + ", CustLastName: " + formData[1]);
+		dbo.collection("customers").updateMany( {}, {$set: {"CustPassword": "$2b$10$1GCEG4PVtV87Xciv7ISVVu.3JhHMT7/1Jac1bJkUgUtcQOi48RHIi"}}, false, true);
+		db.close();
+	
+	});
 	
 	res.render('thanks.ejs', { title: 'secureScript', popText: 'secure passwords set in db', dest: "index"});
 	
@@ -410,6 +426,7 @@ router.get('/contactus', function (req, res, next) {
 
 });
 
+// Sarah
 router.get('/', function (req, res, next) {
 	res.render('index.ejs', {
 		title: 'Travel Experts',
