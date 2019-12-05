@@ -142,7 +142,7 @@ app.post("/post_booking", function (req, res) {
       "BookingDate": new Date(),
       "BookingNo": "DFS3",
       "TravelerCount": travellers,
-      "CustomerId": 143, //When login works, get it
+      "CustomerId": req.session._id,
       "PackageId": pkgNum
     },
       function (err, doc) {

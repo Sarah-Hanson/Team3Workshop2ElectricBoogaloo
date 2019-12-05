@@ -49,6 +49,7 @@ router.post("/login_form", (req, res) => {
 								//console.log("Customer Name pass is correct");
 								req.session.loginName = result.CustFirstName;
 								req.session.loggedIn = true;
+								req.session._id = result._id
 								// console.log(req.session.id);
 								//console.log("Login Name is: " + loginName);
 								//console.log("Logged in: " + loggedIn);
@@ -93,7 +94,7 @@ router.get('/vacation', function (req, res) {
 
 // Sarah Hanson
 router.get('/pickapackage', function (req, res, next) {
-	if (loggedIn) {
+	if (req.session.loggedIn) {
 		var db = req.db;
 		var collection = db.get('packages');
 		collection.find({}, {}, function (e, docs) {
@@ -103,7 +104,8 @@ router.get('/pickapackage', function (req, res, next) {
 				pkgArr: JSON.stringify(docs),
 				pkgID: req.query.pkgID,
 				name: req.session.loginName,
-				loggedstat: req.session.loggedIn
+				loggedstat: req.session.loggedIn,
+				custID: req.session._id
 			});
 		});
 	}
