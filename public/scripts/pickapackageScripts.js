@@ -27,7 +27,7 @@ function changePackage (el) {
 		document.getElementById("pkgStart").innerHTML 	= curPkg.PkgStartDate;
 		document.getElementById("pkgEnd").innerHTML 	= curPkg.PkgEndDate;
 	}
-	console.log(el);
+	//console.log(el);
 }
 
 
