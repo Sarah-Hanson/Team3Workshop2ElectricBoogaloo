@@ -162,7 +162,7 @@ router.get('/index', function (req, res, next) {
 });
 
 
-
+/*
 //Updates the base travelExperts DB with a couple extra fields and documents - Sarah
 router.get('/updateDB', function (req, res, next) {
 	var db = req.db;
@@ -232,7 +232,7 @@ router.get('/updateDB', function (req, res, next) {
 });
 
 
-//Created by Sarah, modified by Wade
+//Created by Sarah, modified by Wade -> Thanks for the typo fixes <3
 router.get('/updateDB2', function (req, res, next) {
 	// var db = req.db;
 	// var collection = db.get('customers');
@@ -252,7 +252,7 @@ router.get('/updateDB2', function (req, res, next) {
 	
 });
 
-
+*/
 
 // Imported formatted and code additons by Wade Grimm, Integrating Raymonds changes from a seperate Git repository into the main work Sarah, Hamish
 // and Wade have been using all along
