@@ -21,19 +21,19 @@
             <form id="regForm" method="post" action="/post_form" target="_blank" class="display-7 font-weight-bold">
                 <div class="form-row">
                     <div class="form-group col-6">
-                        <label for="firstname">First Name</label>
+                        <label for="firstname">*First Name</label>
                         <input type="text" class="form-control" id="firstname" placeholder="First Name" name="firstname"
                             onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
                     </div>
                     <div class="form-group col-6">
-                        <label for="lastname">Last Name</label>
+                        <label for="lastname">*Last Name</label>
                         <input type="text" class="form-control" id="lastname" placeholder="Last Name" name="lastname"
                             onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
                     </div>
                 </div>
                 <div class="form-row ">
                     <div class="form-group col">
-                        <label for="inputAddress">Address</label>
+                        <label for="inputAddress">*Address</label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
                             name="address"
                             onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
@@ -48,12 +48,12 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-sm-6 col-xs-2">
-                        <label for="inputCity">City</label>
+                        <label for="inputCity">*City</label>
                         <input type="text" class="form-control" placeholder="City or Town" id="inputCity" name="city"
                             onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
                     </div>
                     <div class="form-group col-sm-4 col-xs-2">
-                        <label for="inputprov">Prov</label>
+                        <label for="inputprov">*Prov</label>
                         <select id="inputprov" class="form-control" name="prov"
                             onblur="if(this.value != ''){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
                             <option value="" hidden>Please Select</option>
@@ -73,7 +73,7 @@
                         </select>
                     </div>
                     <div class="form-group col-sm-2 col-xs-1">
-                        <label for="inputpostal">Postal Code</label>
+                        <label for="inputpostal">*Postal Code</label>
                         <input type="text" class="form-control" placeholder="P0S T4L" id="inputpostal" name=" postal"
                             onblur="if(fnValidatePostal(this.value)){this.style.backgroundColor = ''}else{this.style.backgroundColor = '#f0cccc'};">
 
@@ -96,11 +96,11 @@
 
                 <div class="form-row">
                     <div class="form-group col-6">
-                        <label for="inputEmail4">Email</label>
+                        <label for="inputEmail4">*Email</label>
                         <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
                     </div>
                     <div class="form-group col-6">
-                        <label for="inputPassword4">Password</label>
+                        <label for="inputPassword4">*Password</label>
                         <input type="password" class="form-control" id="inputPassword4" placeholder="Password"
                             name="password">
                     </div>

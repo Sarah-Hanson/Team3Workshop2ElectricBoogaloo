@@ -81,7 +81,7 @@ app.post("/post_form", (req, res) => {
     var dbo = db.db("travelexperts");
 
     //console.log("CustFirstName: " + formData[0] + ", CustLastName: " + formData[1]);
-    dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] }, (err, result) => {
+    dbo.collection("customers").findOne({ CustEmail: formData[9]}, (err, result) => {
       //console.log("foundName: " + foundName.CustomerId);
       if (result != null) {
         //console.log("User Exists");

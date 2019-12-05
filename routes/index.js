@@ -135,7 +135,7 @@ router.get('/thanksBook', function (req, res, next) {
 
 // Wade Grimm
 router.get('/regerror', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error', dest: 'registration' });
+	res.render('thanks.ejs', { title: 'Data Exists', popText: 'Registration Error - User or email exists, please check data and resubmit', dest: 'registration' });
 });
 
 // Sarah? Hamish?
