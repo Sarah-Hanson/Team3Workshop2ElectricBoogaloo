@@ -163,57 +163,6 @@ function sort_by_key(array, key) {
   });
 }
 
-//login submission
-app.post("/login_form", (req, res) => {
-
-  var loggedIn = false;
-  var loginName = "";
-
-  var userEmail = req.body.CustEmail;
-  var userName = req.body.CustFirstName;
-
-  //connecting to database
-  mongo.connect(url, {
-    useUnifiedTopology: true
-  }, (err, client) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(userEmail);
-      console.log("Connected to Database");
-
-      //find posted email
-      var dbo = client.db("travelexperts");
-      dbo.collection("customers").findOne({
-        CustEmail: userEmail
-      }, (err, result) => {
-        if (err) {
-          throw err;
-        } else {
-          //No email
-          if (result == null) {
-            //alert("This email is not in our records, please register on our site", "Register");
-            res.redirect("/registration"); //check naming
-          }
-          //password checked and correct
-          else if (userName === result.CustFirstName) {
-            console.log("Customer Name pass is correct");
-            loginName = result.CustFirstName;
-            loggedIn = true;
-            console.log("Login Name is: " + loginName);
-            console.log("Logged in: " + loggedIn);
-            res.send("Welcome back " + loginName);
-          }
-          //if passwords do not match
-          else {
-            res.send("Incorrect Password");
-          }
-        }
-      });
-    }
-  });
-});
-
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   console.log(req.url);
