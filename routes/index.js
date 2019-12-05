@@ -30,8 +30,8 @@ router.post("/login_form", (req, res) => {
 		if (err) {
 			throw err;
 		} else {
-			console.log(userEmail);
-			console.log("Connected to Database");
+			//console.log(userEmail);
+			//console.log("Connected to Database");
 			//find posted email
 			var dbo = client.db("travelexperts");
 			dbo.collection("customers").findOne({ CustEmail: userEmail }, (err, result) => {
@@ -39,8 +39,8 @@ router.post("/login_form", (req, res) => {
 					throw err;
 				} else {
 					//No email
-					console.log(result);
-					console.log()
+					//console.log(result);
+					//console.log()
 					if (result == null) {
 						res.redirect("/noemail"); //check naming
 					}
@@ -48,11 +48,11 @@ router.post("/login_form", (req, res) => {
 						//password checked and correct
 						bcrypt.compare(userPass, result.CustPassword, function (err, pwdResult) { // compare hashed password from db to password provided
 							if (pwdResult) {
-								console.log("Customer Name pass is correct");
+								//console.log("Customer Name pass is correct");
 								loginName = result.CustFirstName;
 								loggedIn = true;
-								console.log("Login Name is: " + loginName);
-								console.log("Logged in: " + loggedIn);
+								//console.log("Login Name is: " + loginName);
+								//console.log("Logged in: " + loggedIn);
 								res.redirect("/index");
 							}
 							else {  //if passwords do not match
@@ -293,8 +293,8 @@ router.get('/contactus', function (req, res, next) {
 				if (err) throw err;
 				var x = result;
 				var y = data;
-				console.log(y);
-				console.log(x);
+				//console.log(y);
+				//console.log(x);
 
 				dbo.collection("agencies").find(query2, {
 					projection: {
@@ -320,8 +320,8 @@ router.get('/contactus', function (req, res, next) {
 						if (err) throw err;
 						var w = result;
 						var z = data;
-						console.log(w);
-						console.log(z);
+						//console.log(w);
+						//console.log(z);
 
 
 

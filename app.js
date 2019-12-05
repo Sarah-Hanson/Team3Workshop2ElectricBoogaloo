@@ -165,7 +165,7 @@ function sort_by_key(array, key) {
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  console.log(req.url);
+  //console.log(req.url);
   //console.log(res.url);
   next(createError(404));
 });
@@ -178,7 +178,7 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  console.log(err);
+  //console.log(err);
   res.render('error');
 });
 
