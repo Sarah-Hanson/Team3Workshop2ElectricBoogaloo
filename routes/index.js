@@ -371,25 +371,25 @@ router.get('/contactus', function (req, res, next) {
 						res.write('<div class="container"><div class="row">')
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt4.jpg" width:100%" /><div class="card-body"><h4 class="card-title text-center">' + x[0].AgtFirstName + " " + x[0].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + x[0].AgtBusPhone + '<br/>' + x[0].AgtEmail + '<br/><strong>Experience:</strong>2+ years <br/><strong>Language(s)</strong>: English,Punjabi</p></div></div></div></div>')
 						// res.write("<p>Name: " + x[0].AgtFirstName + " "+ x[0].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[0].AgtBusPhone +  "</p>");
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt5.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[1].AgtFirstName + " " + x[1].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,mandarin</p></div></div></div></div>')
+							'<strong>Tel:</strong> ' + x[1].AgtBusPhone + '<br/>' + x[1].AgtEmail + '<br/><strong>Experience:</strong>2+ years <br/><strong>Language(s)</strong>: English,Mandarin</p></div></div></div></div>')
 						// res.write("<p>Name: " + x[1].AgtFirstName + " "+ x[1].AgtLastName+ "<br/>Email: "+ x[0].AgtEmail +"<br/>Phone: " + x[1].AgtBusPhone +  "</p>");
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt2.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center" >' + x[2].AgtFirstName + " " + x[2].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+							'<strong>Tel:</strong> ' + x[2].AgtBusPhone + '<br/>' + x[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Spanish</p></div></div></div></div>')
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt10.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[3].AgtFirstName + " " + x[3].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + x[3].AgtBusPhone + '<br/>' + x[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + x[3].AgtBusPhone + '<br/>' + x[3].AgtEmail + '<br/><strong>Experience:</strong>5 years <br/><strong>Language(s)</strong>: English, Italian</p></div></div></div></div>')
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt8.jpg" style="width:100%"><div class="card-body"><h4 class="card-title text-center">' + x[4].AgtFirstName + " " + x[4].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + x[4].AgtBusPhone + '<br/>' + x[4].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + x[4].AgtBusPhone + '<br/>' + x[4].AgtEmail + '<br/><strong>Experience:</strong>3 years <br/><strong>Language(s)</strong>: English, French</p></div></div></div></div>')
 						res.write('</div></div><br/><br/><br/><br/><br/>')
 
 
@@ -402,22 +402,22 @@ router.get('/contactus', function (req, res, next) {
 						res.write('<div class="container"><div class="row">')
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt6.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[0].AgtFirstName + " " + w[0].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + w[0].AgtBusPhone + '<br/>' + w[0].AgtEmail + '<br/><strong>Experience:</strong>2+ years <br/><strong>Language(s)</strong>: English</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt11.jpg" style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[1].AgtFirstName + " " + w[1].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + w[1].AgtBusPhone + '<br/>' + w[1].AgtEmail + '<br/><strong>Experience:</strong>7 years <br/><strong>Language(s)</strong>: English,Filipino</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 							'<img class="card-img-top" src="/agentt3.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[2].AgtFirstName + " " + w[2].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + w[2].AgtBusPhone + '<br/>' + w[2].AgtEmail + '<br/><strong>Experience:</strong>3+ years <br/><strong>Language(s)</strong>: English,Portuguese</p></div></div></div></div>')
 
 
 						res.write('<div class="col-lg-4 col-sm-6 mb-3"> <div class="thumbnail"><div class="card" style="width:300px">' +
 						'<img class="card-img-top" src="/agentt.jpg"style="width:100%" /><div class="card-body"><h4 class="card-title text-center">' + w[3].AgtFirstName + " " + w[3].AgtLastName + '</h4><p class="card-text">' +
-							'<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>10+ years <br/><strong>Language(s)</strong>: English,Punjab</p></div></div></div></div>')
+							'<strong>Tel:</strong>' + w[3].AgtBusPhone + '<br/>' + w[3].AgtEmail + '<br/><strong>Experience:</strong>4 years <br/><strong>Language(s)</strong>: English,Japanese</p></div></div></div></div>')
 
 
 
