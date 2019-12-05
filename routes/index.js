@@ -13,8 +13,8 @@ var mySession = {
 
 router.use(session(mySession));
 
-var loginName = "";
-var loggedIn = false;
+//var loginName = "";
+// var loggedIn = false;
 
 	
 //login submission - Hamish, password encryption check - Wade
@@ -25,11 +25,8 @@ router.post("/login_form", (req, res) => {
 	var pwdHashed = false;
 
 	//connecting to database
-	mongo.connect(url, {
-		useUnifiedTopology: true
-	}, (err, client) => {
-		if (err) {
-			throw err;
+	mongo.connect(url, { useUnifiedTopology: true}, (err, client) => {
+		if (err) { throw err;
 		} else {
 			//console.log(userEmail);
 			//console.log("Connected to Database");
@@ -50,8 +47,9 @@ router.post("/login_form", (req, res) => {
 						bcrypt.compare(userPass, result.CustPassword, function (err, pwdResult) { // compare hashed password from db to password provided
 							if (pwdResult) {
 								//console.log("Customer Name pass is correct");
-								loginName = result.CustFirstName;
-								loggedIn = true;
+								req.session.loginName = result.CustFirstName;
+								req.session.loggedIn = true;
+								// console.log(req.session.id);
 								//console.log("Login Name is: " + loginName);
 								//console.log("Logged in: " + loggedIn);
 								res.redirect("/index");
@@ -70,8 +68,8 @@ router.post("/login_form", (req, res) => {
 //Logout button - Hamish
 router.post("/logout_form", (req, res) => {
 
-	loginName = "";
-	loggedIn = false;
+	//req.sessionloginName = "";
+	req.session.destroy();
 	res.redirect("/index");
 
 });
@@ -87,8 +85,8 @@ router.get('/vacation', function (req, res) {
 			{
 				title: "Vacation Packages",
 				pkgList: docs,
-				name: loginName,
-				loggedstat: loggedIn
+				name: req.session.loginName,
+				loggedstat: req.session.loggedIn
 			});
 	});
 });
@@ -104,8 +102,8 @@ router.get('/pickapackage', function (req, res, next) {
 				pkgList: docs,
 				pkgArr: JSON.stringify(docs),
 				pkgID: req.query.pkgID,
-				name: loginName,
-				loggedstat: loggedIn
+				name: req.session.loginName,
+				loggedstat: req.session.loggedIn
 			});
 		});
 	}
@@ -118,8 +116,8 @@ router.get('/pickapackage', function (req, res, next) {
 router.get('/registration', function (req, res, next) {
 	res.render('registration.ejs', {
 		title: 'Client Registration',
-		name: loginName,
-		loggedstat: loggedIn
+		name: req.session.loginName,
+		loggedstat: req.session.loggedIn
 	});
 });
 
@@ -157,8 +155,8 @@ router.get('/noemail', function (req, res, next) {
 router.get('/index', function (req, res, next) {
 	res.render('index.ejs', {
 		title: 'Travel Experts',
-		name: loginName,
-		loggedstat: loggedIn
+		name: req.session.loginName,
+		loggedstat: req.session.loggedIn
 	});
 });
 
@@ -453,8 +451,8 @@ router.get('/contactus', function (req, res, next) {
 router.get('/', function (req, res, next) {
 	res.render('index.ejs', {
 		title: 'Travel Experts',
-		name: loginName,
-		loggedstat: loggedIn
+		name: req.session.loginName,
+		loggedstat: req.session.loggedIn
 	});
 });
 
