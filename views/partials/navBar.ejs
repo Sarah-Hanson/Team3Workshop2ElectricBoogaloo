@@ -1,3 +1,19 @@
+<script type="text/javascript">
+ $(function () {
+	if(<%= loggedstat %>) {
+		document.getElementById("hide").style.display = "block";
+	} else {
+		document.getElementById("hide").style.display = "none";
+	}
+});
+</script>
+
+<style>
+#hide {
+	display: none;
+}
+</style>
+
 <nav class="navbar navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="/index">Travel Experts <%= (name) %></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
@@ -12,7 +28,7 @@
                         name="CustEmail">
                     <input class="form-control mr-sm-2" type="password" placeholder="Password"
                         aria-label="Password" name="CustPassword">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="action();">Login</button>
 				</form>
             </li><br />
             <li class="nav-item"> <a class="nav-link" href="/index">Travel Experts Home</a>
@@ -22,7 +38,7 @@
             </li>
         </ul>
 			<form action="/logout_form" method="post">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="hide">Logout</button>
 			</form>
     </div>
 </nav>

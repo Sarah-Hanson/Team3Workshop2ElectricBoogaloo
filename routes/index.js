@@ -16,6 +16,7 @@ router.use(session(mySession));
 var loginName = "";
 var loggedIn = false;
 
+	
 //login submission - Hamish, password encryption check - Wade
 router.post("/login_form", (req, res) => {
 	const bcrypt = require('bcrypt'); // password encryption module
