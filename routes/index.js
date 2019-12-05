@@ -228,6 +228,16 @@ router.get('/updateDB', function (req, res, next) {
 	});
 });
 
+router.get('/updateDB2', function (req, res, next) {
+	var db = req.db;
+	var collection = db.get('packages');
+	collection.update({}, {$set: {"CustPassword": "password"}}, false, true);
+	
+	res.render('thanks.ejs', { title: 'secureScript', popText: 'secure passwords set in db', dest: "index"});
+	
+});
+
+
 
 // Imported by Wade Grimm, Integrating Raymonds changes from a seperate Git repository into the main work Sarah, Hamish
 // and Wade have been using all along
