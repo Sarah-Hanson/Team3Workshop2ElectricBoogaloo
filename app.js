@@ -52,6 +52,10 @@ console.log("router loaded");
 //Registration submission, added by Wade Grimm 
 // Lots of Console.logs to follow as a ton of troubleshooting was required.
 app.post("/post_form", (req, res) => {
+  const bcrypt = require('bcrypt');
+  const saltRounds = 10;
+  const myPlaintextPassword = req.body.password;
+ 
 
   formData[0] = req.body.firstname;
   formData[1] = req.body.lastname;
@@ -63,9 +67,14 @@ app.post("/post_form", (req, res) => {
   formData[7] = req.body.homephone;
   formData[8] = req.body.busphone;
   formData[9] = req.body.email;
-  formData[10] = req.body.password;
-  
-  
+  bcrypt.genSalt(saltRounds, function (err, salt) {
+    bcrypt.hash(myPlaintextPassword, salt, function (err, hash) {
+      //console.log("Plain pwd: " + myPlaintextPassword);
+      //console.log("Hashed pwd: " + hash);
+      formData[10] = hash;
+    });
+  });
+
   mongo.connect(url, { useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
     //console.log("connected");
@@ -74,7 +83,7 @@ app.post("/post_form", (req, res) => {
     //console.log("CustFirstName: " + formData[0] + ", CustLastName: " + formData[1]);
     dbo.collection("customers").findOne({ CustFirstName: formData[0], CustLastName: formData[1] }, (err, result) => {
       //console.log("foundName: " + foundName.CustomerId);
-      if (result!= null) {
+      if (result != null) {
         //console.log("User Exists");
         db.close();
         //res.send("/UserExists");
@@ -86,7 +95,7 @@ app.post("/post_form", (req, res) => {
           //console.log(result[0].CustomerId);
           clientID = result[0].CustomerId + 1;
           //console.log("ClientID: " + clientID);
-
+       
           var mydoc = {
             CustFirstName: formData[0],
             CustLastName: formData[1],
@@ -104,10 +113,10 @@ app.post("/post_form", (req, res) => {
           };
           dbo.collection("customers").insertOne(mydoc, (err, result) => {
             if (err) throw err;
-          // console.log("Customer inserted");
-          // console.log(result.result);
-          db.close();
-          res.redirect("/thanksReg");
+            // console.log("Customer inserted");
+            // console.log(result.result);
+            db.close();
+            res.redirect("/thanksReg");
           });
         });
       };
@@ -116,44 +125,42 @@ app.post("/post_form", (req, res) => {
 });
 
 //booking post added by Sarah
-app.post("/post_booking", function(req, res) {
-	var db = req.db;
-	var pkgNum = req.body.packageNum;
-	var travellers = req.body.travellers;
-	var collection = db.get('bookings');
-	
-	var bookingID;
-	var bookingArr;
-	collection.find({},{},function(e,docs){
-		docs = sort_by_key(docs,"BookingId");
-		bookingArr = docs;
-		bookingID = docs[0].BookingId+1;
-		collection.insert({
-				"BookingId":bookingID,
-				"BookingDate":new Date(),
-				"BookingNo":"DFS3",
-				"TravelerCount":travellers,
-				"CustomerId":143, //When login works, get it
-				"PackageId":pkgNum
-			},
-			function(err, doc) {
-				if (err) {
-					res.send("problem adding to db");
-				}
-				else {
-					res.redirect("/thanksBook");
-				}
-			});
-		});
+app.post("/post_booking", function (req, res) {
+  var db = req.db;
+  var pkgNum = req.body.packageNum;
+  var travellers = req.body.travellers;
+  var collection = db.get('bookings');
+
+  var bookingID;
+  var bookingArr;
+  collection.find({}, {}, function (e, docs) {
+    docs = sort_by_key(docs, "BookingId");
+    bookingArr = docs;
+    bookingID = docs[0].BookingId + 1;
+    collection.insert({
+      "BookingId": bookingID,
+      "BookingDate": new Date(),
+      "BookingNo": "DFS3",
+      "TravelerCount": travellers,
+      "CustomerId": 143, //When login works, get it
+      "PackageId": pkgNum
+    },
+      function (err, doc) {
+        if (err) {
+          res.send("problem adding to db");
+        }
+        else {
+          res.redirect("/thanksBook");
+        }
+      });
+  });
 });
 // Sarah Hanson
-function sort_by_key(array, key)
-{
- return array.sort(function(a, b)
- {
-  var x = a[key]; var y = b[key];
-  return ((x > y) ? -1 : ((x < y) ? 1 : 0));
- });
+function sort_by_key(array, key) {
+  return array.sort(function (a, b) {
+    var x = a[key]; var y = b[key];
+    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+  });
 }
 
 //login submission
@@ -195,7 +202,7 @@ app.post("/login_form", (req, res) => {
             loggedIn = true;
             console.log("Login Name is: " + loginName);
             console.log("Logged in: " + loggedIn);
-			res.send("Welcome back " + loginName);
+            res.send("Welcome back " + loginName);
           }
           //if passwords do not match
           else {
@@ -209,8 +216,8 @@ app.post("/login_form", (req, res) => {
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-	console.log(req.url);
-	//console.log(res.url);
+  console.log(req.url);
+  //console.log(res.url);
   next(createError(404));
 });
 
