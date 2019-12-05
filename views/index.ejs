@@ -31,42 +31,40 @@
 <body>
 	<% include ./partials/navBar.ejs %>
 	<div class="jumbotron sticky-top jumbo-bg fill pt-50"> <!-- small change by sarah -->
-		<div class="jumbotron col-lg-8 col-md-8 col-sm-8 col-xs-8 offset-2 float-md-center see-through" style="height: 90vh; margin-top: 25px">
-			<div class="container col-12">
+		<div class="jumbotron col-lg-8 col-sm-12 mx-auto see-through h-50">
 				<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
 					<div class="carousel-inner">
 					  <div class="carousel-item active" data-interval="10000">
-						<img src="scrollpics/Zen.jpg" class="d-block" style="width:100%; height:77vh" alt="...">
+						<img src="scrollpics/Zen.jpg" class="image-responsive" style="width:100%; max-height:70vh" alt="...">
 								<div id="carouselHead" class="see-through text-center">
 									<h1>Welcome <%=(name) %> to Travel Experts</h1>
 									<p>Welcome to our luxurious site with many opportunities for travel</p>
 								</div>
 							 </div>
 					  <div class="carousel-item" data-interval="10000">
-						<img src="Vienna2.jpg" class="d-block w-100" style="width:100%; height:77vh" alt="...">
-						<div id="carouselSecond" class="see-through text-center col-5">
+						<img src="scrollpics/Vienna2.jpg" class="d-block w-100" style="width:100%; max-height:70vh" alt="...">
+						<div id="carouselSecond" class="see-through text-center">
 							<h1>About Us</h1>
 							<p>Established in 2019, Travel Experts is a group of ambitious travel guides and organizers to provide you with the trip of your dreams</p>
 							<a href="contactus">More about us</a>
 						</div>
 					  </div>
 					  <div class="carousel-item"data-interval="10000">
-						<img src="mountains1.jpg" class="d-block w-100" style="width:100%; height:77vh" alt="...">
-						<div id="carouselHead" class="see-through text-center col-5">
+						<img src="scrollpics/mountains1.jpg" class="d-block w-100" style="width:100%; max-height:70vh" alt="...">
+						<div id="carouselHead" class="see-through text-center">
 							<h1>Travel Packages</h1>
 							<p>Enjoy our tremedeously designed travel packages</p>
 							<a href="/vacation">Click here for more information</a>
 						</div>
 					  </div>
 					  <div class="carousel-item" data-interval="10000">
-						<img src="Shirahama.jpg" class="d-block w-100" style="width:100%; height:77vh" alt="...">
-						<div id="carouselSecond" class="see-through text-center col-5">
+						<img src="scrollpics/Shirahama.jpg" class="d-block w-100" style="width:100%; max-height:70vh" alt="...">
+						<div id="carouselSecond" class="see-through text-center">
 							<h1>Register Now!</h1>
 							<p>Our trip registration is quicker than ever!</p>
 							<a href="/Registration">Click here to start your new adventure!</a>
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
