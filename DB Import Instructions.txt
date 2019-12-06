@@ -1,0 +1,3 @@
+
+Drop your current travel experts db. Using studio3t, do an Import -> BSON - mongodump archive, 
+set the connection to localhost and chose the Travel_Experts_Dump_Dec_5.agz file then Exectute the command
