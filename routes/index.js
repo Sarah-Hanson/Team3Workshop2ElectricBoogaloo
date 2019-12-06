@@ -125,12 +125,12 @@ router.get('/registration', function (req, res, next) {
 
 // Wade Grimm
 router.get('/thanksReg', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Thanks for your data', popText: 'registration accepted', dest: 'index' });
+	res.render('thanks.ejs', { title: 'Thanks for your data', popText: 'Thank you for registering', dest: 'index' });
 });
 
 // Sarah Hanson
 router.get('/thanksBook', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Thanks for booking', popText: 'thanks for booking', dest: 'index' });
+	res.render('thanks.ejs', { title: 'Thanks for booking', popText: 'Thanks you for booking with Travel Experts', dest: 'index' });
 });
 
 // Wade Grimm
@@ -145,7 +145,7 @@ router.get('/pickError', function (req, res, next) {
 
 // Hamish
 router.get('/incorrectpass', function (req, res, next) {
-	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'Incorrect Password', dest: 'index' });
+	res.render('thanks.ejs', { title: 'Incorrect Password', popText: 'USerId or Password incorrect', dest: 'index' });
 });
 
 // Hamish
