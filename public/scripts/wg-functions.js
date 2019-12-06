@@ -38,7 +38,7 @@ function fnFormValidate() {
         return false;
     } else {
         if (fnValidatePostal(document.getElementById("inputpostal").value)) {
-            return confirm("Continue submitting?");
+            return confirm("Continue submitting data?");
             /*if(confirm("Continue submitting?")){
                 fnSubmit();
             } */
