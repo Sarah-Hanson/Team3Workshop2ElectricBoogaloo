@@ -11,3 +11,5 @@
 > App has a lot of the core funtionality, the rest residing in the bin folder
 
 > Server can be launched by typing npm start to execute the start command in the package, I've set up nodemon already and modified the start command accordingly.
+
+-- Sarah
